@@ -26,6 +26,9 @@ class _InscriptionPageState extends State<InscriptionPage> {
   bool couleur_bordure_mot_de_passe=true;
   bool couleur_bordure_champs_confirmation=true;
 
+  //booleen permettant de faire afficher le mot de passe
+  bool afficher_mot_de_passe=true;
+
   //fonction permettant de nous diriger vers le whatsapp de kyiyotaka's food
   Future <void> lancer_whatsapp ()async{
     try {
@@ -116,7 +119,12 @@ class _InscriptionPageState extends State<InscriptionPage> {
         });
       }
     }
-
+    //fonction pour afficher le mot de passe
+void affichermotdepasse(){
+    setState(() {
+      afficher_mot_de_passe=!afficher_mot_de_passe;
+    });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,12 +259,16 @@ decoration: BoxDecoration(
             width: MediaQuery.of(context).size.width *0.8,
             height: MediaQuery.of(context).size.height *0.065,
             child: TextFormField(
+              obscureText: afficher_mot_de_passe,
               controller: confirmation_mot_de_passe,
               cursorColor: Color(0xFF8B3E3B),
               style: TextStyle(fontFamily: "Poppins",color:Color(0xFF8B3E3B) ),
 
               decoration: InputDecoration(
-                suffixIcon: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.eye_fill,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B))),
+                suffixIcon: IconButton(onPressed: (){
+                  affichermotdepasse();
+
+                }, icon: Icon(afficher_mot_de_passe?CupertinoIcons.eye_fill:CupertinoIcons.eye_slash_fill,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B))),
                   prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red),
                   label: Text("CONFIRMER LE CODE",style: TextStyle(fontFamily: "Poppins",),),
 
