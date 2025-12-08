@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kiyotaka_s_food/Pages/Connexion.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -14,7 +15,7 @@ class InscriptionPage extends StatefulWidget {
 
 class _InscriptionPageState extends State<InscriptionPage> {
 
-  //varible permettant de stocker des valeurs
+  //varible permettant de stocker des valeurs des saisies
   final nom_complet=TextEditingController();
   final numero=TextEditingController();
   final mot_de_passe=TextEditingController();
@@ -63,11 +64,22 @@ class _InscriptionPageState extends State<InscriptionPage> {
 
     )));
   }
+  void message_champs_espace(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.orange),
+      child: ListTile(title: Text("PAS D'ESPACE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIEZ LE CODE",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.dangerous_outlined,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+
+    )));
+  }
     //fonction de verification des valeurs des champs de saisie
     void verification()async{
-      if(nom_complet.text.isEmpty||numero.text.isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty||numero.text.length!=10){
-        if(nom_complet.text.isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty){
-
+      if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty||numero.text.isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty||numero.text.length!=10){
+        if(nom_complet.text.isEmpty|| nom_complet.text.trim().isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty){
           message_champ_vide();
         }
         else if(numero.text.length!=10){
@@ -77,7 +89,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
           message_numero_chiffre();
         }
       }
-    if(nom_complet.text.isEmpty){
+    if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty){
         setState(() {
           couleur_bordure_nom=false;
         });
@@ -93,12 +105,15 @@ class _InscriptionPageState extends State<InscriptionPage> {
           couleur_bordure_mot_de_passe=false;
         });
       }
+      if(mot_de_passe.text.contains(" ")){
+        message_champs_espace();
+      }
       if(confirmation_mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text!=mot_de_passe.text||confirmation_mot_de_passe.text.contains(" ")){
         setState(() {
           couleur_bordure_champs_confirmation=false;
         });
       }
-      if(nom_complet.text.isNotEmpty){
+      if(nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty){
         setState(() {
           couleur_bordure_nom=true;
         });
@@ -191,6 +206,7 @@ void affichermotdepasse(){
             child: TextFormField(
               controller: numero,
               cursorColor: Color(0xFF8B3E3B),
+
               style: TextStyle(fontFamily: "Poppins",color:Color(0xFF8B3E3B) ),
 
               inputFormatters: [
@@ -318,6 +334,8 @@ SizedBox(height: MediaQuery.of(context).size.height *0.02,),
                 width: MediaQuery.of(context).size.width *0.5,
                 decoration: BoxDecoration(color: Colors.green,borderRadius:BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.07))),
 
+                //widget renfermant une option de reconnexion
+
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -338,7 +356,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.02,),
             Text("Deja un compte ? ",style: TextStyle(fontFamily: "Poppins"),),
 
             TextButton(onPressed: (){
-
+Navigator.push(context, MaterialPageRoute(builder: (context)=>ConnexionPage()));
             }, child:Text("SE CONNECTER",style: TextStyle(color: Color(0xFF8B3E3B),fontFamily: "Poppins"),)
             )
            ],),)
