@@ -43,7 +43,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
             child: TextFormField(
 
               decoration: InputDecoration(
-                  prefixIcon: Icon(CupertinoIcons.pen,size: MediaQuery.of(context).size.width *0.06,color: Color(0xFF8B3E3B),),
+                  prefixIcon: Icon(CupertinoIcons.pen,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B),),
                   label: Text("NOM COMPLET ",style: TextStyle(fontFamily: "Poppins",),),
 
                   labelStyle: TextStyle(color: Color(0xFF8B3E3B)),
@@ -72,7 +72,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
             child: TextFormField(
 
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.tag,size: MediaQuery.of(context).size.width *0.06,color: Color(0xFF8B3E3B),),
+                  prefixIcon: Icon(Icons.tag,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B),),
                   label: Text("NUMERO ",style: TextStyle(fontFamily: "Poppins",),),
 
                   labelStyle: TextStyle(color: Color(0xFF8B3E3B)),
@@ -100,7 +100,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
             height: MediaQuery.of(context).size.height *0.065,
             child: TextFormField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.06,color: Color(0xFF8B3E3B)),
+                prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B)),
                   label: Text("MOT DE PASSE ",style: TextStyle(fontFamily: "Poppins",),),
 
                   labelStyle: TextStyle(color: Color(0xFF8B3E3B)),
@@ -127,8 +127,8 @@ decoration: BoxDecoration(
             height: MediaQuery.of(context).size.height *0.065,
             child: TextFormField(
               decoration: InputDecoration(
-                suffixIcon: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.eye_fill,size: MediaQuery.of(context).size.width *0.06,color: Color(0xFF8B3E3B))),
-                  prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.06,color: Color(0xFF8B3E3B)),
+                suffixIcon: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.eye_fill,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B))),
+                  prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: Color(0xFF8B3E3B)),
                   label: Text("CONFIRMER LE CODE",style: TextStyle(fontFamily: "Poppins",),),
 
                   labelStyle: TextStyle(color: Color(0xFF8B3E3B)),
@@ -146,7 +146,7 @@ decoration: BoxDecoration(
           ),
           SizedBox(height: MediaQuery.of(context).size.height *0.02,),
           // les deux traits et le mot "assistance"
-          Container(child: ElevatedButton(onPressed: (){}, child: Text("S'INSCRIRE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.045),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
+          Container(child: ElevatedButton(onPressed: (){}, child: Text("S'INSCRIRE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.04),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
 SizedBox(height: MediaQuery.of(context).size.height *0.02,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -173,7 +173,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.02,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(FontAwesomeIcons.whatsapp,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),
+                    Icon(FontAwesomeIcons.whatsapp,color: Colors.white,size: MediaQuery.of(context).size.width *0.07,),
                     SizedBox(width: MediaQuery.of(context).size.width *0.02,),
                     Text("WHATSAPP ",style: TextStyle(color: Colors.white,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05),)
                   ],),
