@@ -71,6 +71,11 @@ flutter:
      - assets/images/Water _).jpg
      - assets/images/crepes fromage.jpg
      - assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg
+     - assets/images/crepes ceralac.jpg
+     - assets/images/crepes chocolat.jpg
+     - assets/images/crepes fromage.jpg
+     - assets/images/sprit.jpg
+     - assets/images/fanta.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
