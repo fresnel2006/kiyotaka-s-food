@@ -62,6 +62,16 @@ flutter:
   assets:
      - assets/images/kiyotaka image entreprise.png
      - assets/images/kiyotaka image 2 entreprise.png
+     - assets/images/kiyotaka image entreprise 2.png
+     - assets/images/Splash photography on Behance.jpg
+     - assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg
+     - assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg
+     - assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg
+     - assets/images/empiler de crêpe avec Chocolat bruine.jpg
+     - assets/images/Water _).jpg
+     - assets/images/crepes fromage.jpg
+     - assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
