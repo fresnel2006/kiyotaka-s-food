@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kiyotaka_s_food/Pages/Produit.dart';
 
 class AcceuilPage extends StatefulWidget {
   const AcceuilPage({super.key});
@@ -10,15 +11,18 @@ class AcceuilPage extends StatefulWidget {
 }
 
 class _AcceuilPageState extends State<AcceuilPage> {
+
 int valeur_redictrice_widget=1;
-  var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
+var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/Water _).jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
 var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES","EAU"];
-var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","500-2000 fCFA","200 FCFA"];
+var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
 var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
- var titre_liste_verticale=["FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
- var prix_liste_vertical=["500-2000 FCFA","500-2000 FCFA","500-2000 FCFA","500 FCFA"];
+var titre_liste_verticale=["FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","1000-2000 FCFA","500 FCFA"];
+
   @override
   Widget build(BuildContext context) {
+    var index;
     return Scaffold(
       backgroundColor: Colors.white,
 body: Stack(
@@ -79,7 +83,7 @@ GestureDetector(
   onTap: (){
     setState(() {
       valeur_redictrice_widget=2;
-    });;
+    });
   },
     child:valeur_redictrice_widget==2?Container(
     alignment: AlignmentGeometry.center,
@@ -120,8 +124,15 @@ valeur_redictrice_widget==1?
                 scrollDirection: Axis.horizontal,
                 child: Row(
                 children: [
-
-                  Container(
+//Premiere menu horizontal
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        index=0;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
+                    },
+                    child: Container(
                     height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
@@ -149,9 +160,17 @@ valeur_redictrice_widget==1?
 
                       ],),)
 
-                  ],),),
+                  ],),),),
                   SizedBox(width: MediaQuery.of(context).size.width *0.03,),
-                  Container(
+//deuxieme
+                  GestureDetector(
+    onTap: (){
+    setState(() {
+    index=1;
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
+    },
+                    child: Container(
                     height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
@@ -178,8 +197,18 @@ valeur_redictrice_widget==1?
                               Icon(Icons.shopping_cart)
                             ],),)
 
-                      ],),),
+                      ],),),),
                   SizedBox(width: MediaQuery.of(context).size.width *0.03,),
+
+                  //troisieme
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        index=2;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
+                    },
+                    child:
                   Container(
                     height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
@@ -208,8 +237,18 @@ valeur_redictrice_widget==1?
 
                             ],),),SizedBox(width: MediaQuery.of(context).size.width *0.03,),
 
-                      ],),),
+                      ],),),),
                   SizedBox(width: MediaQuery.of(context).size.width *0.03,),
+
+                  //quatrieme
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        index=3;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
+                    },
+                    child:
                   Container(
     height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
@@ -237,8 +276,17 @@ valeur_redictrice_widget==1?
                                 Icon(Icons.shopping_cart)
 
                             ],),),
-                      ],),),SizedBox(width: MediaQuery.of(context).size.width *0.03,)
-                  ,Container(
+                      ],),),),
+    SizedBox(width: MediaQuery.of(context).size.width *0.03,),
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        index=4;
+                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
+                    },
+                    child:
+                  Container(
                     height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
@@ -269,7 +317,7 @@ valeur_redictrice_widget==1?
                       ],),),
 
 
-                ],),
+                  )],),
 
               )):Text(""),
             
@@ -288,7 +336,15 @@ valeur_redictrice_widget==1?
 
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,itemBuilder: (context, index) => Container(
+                itemCount: 4,itemBuilder: (context, index) => GestureDetector(
+                onTap: (){
+                  setState(() {
+                    int valeur=index+4;
+                    index=valeur+1;
+                  });
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+                },
+                child: Container(
                 margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.012,left: MediaQuery.of(context).size.width *0.02),
                 child: Row(
                   children: [
@@ -325,7 +381,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.05),
                     )
                     
               ],),),)
-              ,):Text("")
+              ,)):Text("")
     ],
         )
     ),

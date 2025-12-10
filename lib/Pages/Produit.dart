@@ -2,13 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProduitPage extends StatefulWidget {
-  const ProduitPage({super.key});
-
+  ProduitPage({super.key, required this.index});
+var index;
   @override
   State<ProduitPage> createState() => _ProduitPageState();
 }
 
 class _ProduitPageState extends State<ProduitPage> {
+  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
+  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES","EAU","FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
+  var prix=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 FCFA","200 FCFA","1000-2000 FCFA","1000-2000 FCFA","1000-2000 FCFA","500 FCFA"];
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +25,7 @@ class _ProduitPageState extends State<ProduitPage> {
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
               height: MediaQuery.of(context).size.height *0.32,
               width: MediaQuery.of(context).size.width *1,
-              child: Image.asset("assets/images/crepes fromage.jpg",fit: BoxFit.cover,),),
+              child: Image.asset(images[widget.index],fit: BoxFit.cover,),),
 
                 Container(
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
@@ -95,7 +101,9 @@ color: Colors.deepOrangeAccent
                 borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))
             ),
 
-            child: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.arrow_left,color: Colors.deepOrangeAccent,)),),
+            child: IconButton(onPressed: (){
+              Navigator.pop(context);
+            }, icon: Icon(CupertinoIcons.arrow_left,color: Colors.deepOrangeAccent,)),),
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.04,left: MediaQuery.of(context).size.width *0.9),
 
@@ -105,17 +113,19 @@ color: Colors.deepOrangeAccent
             child: Column(
             children: [
 Container(
-  margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.02),
-  child: Text("CRÊPES AU CHOCOLAT ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ),),
+  margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.01),
+  width:MediaQuery.of(context).size.width *0.7,
+
+  child: Text(titre[widget.index],style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ),),
 ),
               Container(
-                margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.01),
-                width: MediaQuery.of(context).size.height *0.3,
+                margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.017),
+                width: MediaQuery.of(context).size.height *0.32,
 
                 child: Row(
                   children: [
                   Text("PRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 )),
-                  Text("500-2000 FCFA",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
+                  Text(prix[widget.index],style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
                 ],),),
 
 
@@ -163,18 +173,37 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
             width: MediaQuery.of(context).size.width *0.9,
 
 
-            child: Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.05),),),
+            child: Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.05),),),
           Container(
-            color: Colors.blue,
-            height:100 ,
-            width: 200,
-            margin: EdgeInsets.only(top: 700),
+          decoration: BoxDecoration(
+              color: Colors.deepOrangeAccent,
+            borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1,))
+          ),
+
+            height:MediaQuery.of(context).size.height *0.08 ,
+            width: MediaQuery.of(context).size.width *0.5,
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.75,left: MediaQuery.of(context).size.width *0.05),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-            IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.minus)),
-              Text("...",style: TextStyle(fontFamily: "Poppins"),),
-              IconButton(onPressed: (){}, icon: Icon(Icons.add))
-          ],),)
+            IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
+              Text("1000 FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
+              IconButton(onPressed: (){
+
+              }, icon: Icon(Icons.add,color: Colors.white,))
+          ],),),
+          Container(
+            alignment: AlignmentGeometry.center,
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.9),
+            height: MediaQuery.of(context).size.height *0.1,
+            width: MediaQuery.of(context).size.width *1,
+
+            decoration: BoxDecoration(
+                color: Colors.deepOrangeAccent,
+              borderRadius: BorderRadius.only(topLeft:Radius.circular(MediaQuery.of(context).size.width *1),topRight: Radius.circular(MediaQuery.of(context).size.width *1))
+            ),
+            child: Text("COMMANDER",style: TextStyle(color: Colors.white,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06),),
+          )
       ],
       ),
     );
