@@ -61,7 +61,13 @@ body: Stack(
                           valeur_redictrice_widget=1;
                         });
                       },
-                      child:Container(
+                      child:valeur_redictrice_widget==1?Container(
+                        alignment: AlignmentGeometry.center,
+                        height: MediaQuery.of(context).size.height *0.05,
+                        width: MediaQuery.of(context).size.width *0.24,
+                        child: Text("TOUS",style: TextStyle(fontFamily: "Poppins",color: Colors.orange),),
+                        decoration: BoxDecoration(border: Border.all(color: Colors.orange),color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
+                      ):Container(
                         alignment: AlignmentGeometry.center,
                         height: MediaQuery.of(context).size.height *0.035,
                         width: MediaQuery.of(context).size.width *0.22,
@@ -75,14 +81,21 @@ GestureDetector(
       valeur_redictrice_widget=2;
     });;
   },
-    child:Container(
+    child:valeur_redictrice_widget==2?Container(
+    alignment: AlignmentGeometry.center,
+    height: MediaQuery.of(context).size.height *0.05,
+    width: MediaQuery.of(context).size.width *0.24,
+    child: Text("CRÊPES",style: TextStyle(fontFamily: "Poppins",color: Colors.orange),),
+    decoration: BoxDecoration(border: Border.all(color: Colors.orange),color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
+    ):Container(
   alignment: AlignmentGeometry.center,
   height: MediaQuery.of(context).size.height *0.035,
   width: MediaQuery.of(context).size.width *0.22,
   child: Text("CRÊPES",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
   decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
 ) ),
-                    GestureDetector(child: Container(
+                    GestureDetector(
+                      child: Container(
                       alignment: AlignmentGeometry.center,
                       height: MediaQuery.of(context).size.height *0.035,
                       width: MediaQuery.of(context).size.width *0.22,
@@ -329,6 +342,28 @@ valeur_redictrice_widget==2?Container(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Le menu du haut qui est fixe
   Container(
     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.032),
@@ -338,7 +373,7 @@ valeur_redictrice_widget==2?Container(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(onPressed: (){
-        }, icon: Icon(Icons.menu_sharp,size: MediaQuery.of(context).size.width *0.1,)),
+        }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.1,)),
         Row(children: [
           Icon(Icons.local_restaurant ,size:MediaQuery.of(context).size.width *0.09),
           Text("kiyotaka's food",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05),),

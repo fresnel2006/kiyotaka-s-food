@@ -4,6 +4,7 @@ import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
 import 'package:kiyotaka_s_food/Pages/Connexion.dart';
 import 'package:kiyotaka_s_food/Pages/Inscription.dart';
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
+import 'package:kiyotaka_s_food/Pages/Produit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MainscreenPage(),
+        body: ProduitPage(),
       ),
     );
   }
