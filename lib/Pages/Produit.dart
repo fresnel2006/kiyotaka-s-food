@@ -10,11 +10,44 @@ var index;
 
 class _ProduitPageState extends State<ProduitPage> {
   var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
-  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES","EAU","FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
-  var prix=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 FCFA","200 FCFA","1000-2000 FCFA","1000-2000 FCFA","1000-2000 FCFA","500 FCFA"];
+  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
+  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,500];
 
+  var prix_produit;
+  void reduction_augmentation_prix(){
+    if (widget.index==0||widget.index==2){
+      setState(() {
+        prix_produit=1000;
+      });
+    }
+    else if (widget.index==1||widget.index==8){
+      setState(() {
+        prix_produit=500;
+      });
+    }
+    else if(widget.index==7){
+      setState(() {
+        prix_produit=3500;
+      });
+    }
+    else if(widget.index==4){
+      setState(() {
+        prix_produit=200;
+      });
+    }
+    else{
+      setState(() {
+        prix_produit=1000;
+      });
+    }
 
+  }
 
+  @override
+  void initState(){
+    super.initState();
+    reduction_augmentation_prix();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +158,7 @@ Container(
                 child: Row(
                   children: [
                   Text("PRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 )),
-                  Text(prix[widget.index],style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
+                  Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
                 ],),),
 
 
@@ -186,10 +219,26 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-            IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
-              Text("1000 FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
-              IconButton(onPressed: (){
+            IconButton(onPressed: (){
+              if(widget.index==3||widget.index==6||widget.index==7){
+                if(prix_produit==2000){
+                  setState(() {
+                    prix_produit-=1000;
+                  });
+                }
 
+              }
+            }, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
+              Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
+              IconButton(onPressed: (){
+        if(widget.index==3||widget.index==6||widget.index==7){
+          if(prix_produit==1000){
+            setState(() {
+              prix_produit+=1000;
+            });
+          }
+
+        }
               }, icon: Icon(Icons.add,color: Colors.white,))
           ],),),
           Container(

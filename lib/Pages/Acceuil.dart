@@ -13,12 +13,12 @@ class AcceuilPage extends StatefulWidget {
 class _AcceuilPageState extends State<AcceuilPage> {
 
 int valeur_redictrice_widget=1;
-var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/Water _).jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
-var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES","EAU"];
+var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
+var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU"];
 var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
 var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
 var titre_liste_verticale=["FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
-var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","1000-2000 FCFA","500 FCFA"];
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","500 FCFA"];
 
   @override
   Widget build(BuildContext context) {
@@ -332,8 +332,6 @@ valeur_redictrice_widget==1?
             ],):Text(""),
             valeur_redictrice_widget==1?Container(
               height: MediaQuery.of(context).size.height *0.6,
-
-
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 4,itemBuilder: (context, index) => GestureDetector(
