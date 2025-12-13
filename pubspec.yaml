@@ -76,6 +76,8 @@ flutter:
      - assets/images/crepes fromage.jpg
      - assets/images/sprit.jpg
      - assets/images/fanta.jpg
+     - assets/images/mariame food.png
+     - assets/images/Crêpes au yaourt.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

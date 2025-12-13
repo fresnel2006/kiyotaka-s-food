@@ -12,13 +12,28 @@ class AcceuilPage extends StatefulWidget {
 
 class _AcceuilPageState extends State<AcceuilPage> {
 
+//variable de redirections redirigeant vers les differents contenaire tous, crepes,boissons,midi
 int valeur_redictrice_widget=1;
+
+//les differentes liste contenant les images de l'apk
+
+  //images de la liste horizontale
 var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
+
+//titres de la liste horizontale
 var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU"];
+
+//prix de la liste horizontale
 var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
-var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
-var titre_liste_verticale=["FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
-var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","500 FCFA"];
+
+//images de la liste verticale
+var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
+
+//titres de la liste horizontale
+var titre_liste_verticale=["FROMAGE  CERELAC","CRÊPES  CHOCOLAT","CRÊPES FROMAGE","CRÊPES NATURE","SPRIT","FANTA","ORANGINA"];
+
+//prix de la liste horizontale
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500-4000 FCFA","1000-1500 FCFA","500 FCFA","500 FCFA","500 FCFA"];
 
   @override
   Widget build(BuildContext context) {
@@ -34,31 +49,42 @@ body: Stack(
           children: [
             //espace du haut
             SizedBox(height: MediaQuery.of(context).size.height *0.035,),
+            //espace du haut
+
             //widget permettant de centrer
             Container(width: MediaQuery.of(context).size.width *1,),
             //le widget permettant de stocker l'image et "crepes" "boissons" "midi"
 
 
+      //widget de l'image de kiyotaka's food
+            valeur_redictrice_widget==2?Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
+              child:  Image.asset("assets/images/mariame food.png",fit: BoxFit.cover,height: MediaQuery.of(context).size.height *0.18,width:MediaQuery.of(context).size.width *0.45
 
-    Stack(
-      children: [
-      Container(
+              ),):Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
         height: MediaQuery.of(context).size.height *0.18,
         width: MediaQuery.of(context).size.width *0.85,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1
-
             ))),child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),
         child: Image.asset("assets/images/kiyotaka image entreprise.png",fit: BoxFit.cover,),),
       ),
 
-    ],),SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+
+
+            //espace
+            SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+           //espace
+
+            //le widget contenant "tous", "crepes","BOISSONS" et "MIDI"
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
+                    //Pour affichier la premiere partie du contenaire avec marqué tous
                     GestureDetector(
                       onTap: (){
                         setState(() {
@@ -79,6 +105,9 @@ body: Stack(
                         decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
                       ) ,
                     ),
+
+//Pour affichier la seconde partie du contenaire avec marqué crepes
+
 GestureDetector(
   onTap: (){
     setState(() {
@@ -98,22 +127,50 @@ GestureDetector(
   child: Text("CRÊPES",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
   decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
 ) ),
+
+                    //Pour affichier la troisieme partie du contenaire avec marqué BOISSONS
+
                     GestureDetector(
-                      child: Container(
+onTap: (){
+  setState(() {
+    valeur_redictrice_widget=3;
+  });
+},
+                      child: valeur_redictrice_widget==3?Container(
                       alignment: AlignmentGeometry.center,
-                      height: MediaQuery.of(context).size.height *0.035,
-                      width: MediaQuery.of(context).size.width *0.22,
-                      child: Text("BOISSONS",style: TextStyle(fontFamily: "Poppins",color: Colors.white)),
-                      decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
-                    ),),
-                    GestureDetector(child: Container(
+                        height: MediaQuery.of(context).size.height *0.05,
+                        width: MediaQuery.of(context).size.width *0.24,
+                      child: Text("BOISSONS",style: TextStyle(fontFamily: "Poppins",color: Colors.orange)),
+                      decoration: BoxDecoration(border: Border.all(color: Colors.orange),color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
+                    ):Container(
+                        alignment: AlignmentGeometry.center,
+                        height: MediaQuery.of(context).size.height *0.035,
+                        width: MediaQuery.of(context).size.width *0.22,
+                        child: Text("BOISSONS",style: TextStyle(fontFamily: "Poppins",color: Colors.white)),
+                        decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
+                      ),),
+
+                    //Pour affichier la troisieme partie du contenaire avec marqué BOISSONS
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          valeur_redictrice_widget=4;
+                        });
+                      },
+                      child: valeur_redictrice_widget==4?Container(
+    alignment: AlignmentGeometry.center,
+                        height: MediaQuery.of(context).size.height *0.05,
+                        width: MediaQuery.of(context).size.width *0.24,
+    child: Text("MIDI",style: TextStyle(fontFamily: "Poppins",color: Colors.orange)),
+    decoration: BoxDecoration(border: Border.all(color: Colors.orange),color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
+                      ):Container(
                       alignment: AlignmentGeometry.center,
                       height: MediaQuery.of(context).size.height *0.035,
                       width: MediaQuery.of(context).size.width *0.22,
                       child: Text("MIDI",style: TextStyle(fontFamily: "Poppins",color: Colors.white)),
                       decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),
                     ),)
-                    ,
+
                   ],),
 SizedBox(height: MediaQuery.of(context).size.height *0.03,),
 valeur_redictrice_widget==1?
@@ -331,10 +388,10 @@ valeur_redictrice_widget==1?
                 decoration: BoxDecoration(border: Border.all(color: Colors.orange)),)
             ],):Text(""),
             valeur_redictrice_widget==1?Container(
-              height: MediaQuery.of(context).size.height *0.6,
+              height: MediaQuery.of(context).size.height *0.85,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,itemBuilder: (context, index) => GestureDetector(
+                itemCount: 6,itemBuilder: (context, index) => GestureDetector(
                 onTap: (){
                   setState(() {
                     int valeur=index+4;
@@ -383,9 +440,338 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.05),
     ],
         )
     ),
+
+
+
+
+
 valeur_redictrice_widget==2?Container(
-    margin: EdgeInsets.only(top: 300),
-    child: Text("crepes ouvert")):Text(""),
+    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+    height: MediaQuery.of(context).size.height *0.8,
+
+    child: SingleChildScrollView(
+      child: Column(
+    children: [
+    Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      GestureDetector(child:
+    Container(
+    height: MediaQuery.of(context).size.height *0.34,
+    decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+    child: Column(
+    children: [
+
+    Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+    child: Image.asset(images_liste_verticale[0],fit: BoxFit.cover,),))
+    ,Container(
+
+    child: Column(
+
+    children: [
+    SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+    Row(
+    children: [
+    Text(titre_liste_verticale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+    ],),
+
+
+SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+    Text(prix_liste_vertical[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+    SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+    Icon(Icons.shopping_cart)
+
+    ],),)
+
+    ],),),
+      ),
+    GestureDetector(
+      child:
+    Container(
+    height: MediaQuery.of(context).size.height *0.34,
+    decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+    child: Column(
+    children: [
+
+    Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+    child: Image.asset(images_liste_verticale[1],fit: BoxFit.cover,),))
+    ,Container(
+
+    child: Column(
+
+    children: [
+    SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+    Row(children: [
+    Text(titre_liste_verticale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+    ],),
+
+
+      SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+    Text(prix_liste_vertical[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+    SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+    Icon(Icons.shopping_cart)
+
+    ],),)
+
+    ],),)),
+
+    ],),
+      SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GestureDetector(child:
+          Container(
+            height: MediaQuery.of(context).size.height *0.34,
+            decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+            child: Column(
+              children: [
+
+                Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                  child: Image.asset(images_liste_verticale[2],fit: BoxFit.cover,),))
+                ,Container(
+
+                  child: Column(
+
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                      Row(
+                        children: [
+
+                          Text(titre_liste_verticale[2],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                        ],),
+
+
+                      SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                      Text(prix_liste_vertical[2],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                      SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                      Icon(Icons.shopping_cart)
+
+                    ],),)
+
+              ],),),
+          ),
+          GestureDetector(
+              child:
+              Container(
+                height: MediaQuery.of(context).size.height *0.34,
+                decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                child: Column(
+                  children: [
+
+                    Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                      child: Image.asset(images_liste_verticale[3],fit: BoxFit.cover,),))
+                    ,Container(
+
+                      child: Column(
+
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                          Row(children: [
+                            Text(titre_liste_verticale[3],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                          ],),
+
+
+                          SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                          Text(prix_liste_vertical[3],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                          Icon(Icons.shopping_cart)
+
+                        ],),)
+
+                  ],),)),
+
+        ],)
+
+
+    ],),)):Text(""),
+
+    valeur_redictrice_widget==3?Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+      child: SingleChildScrollView(
+  child: Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GestureDetector(
+            child:
+          Container(
+            height: MediaQuery.of(context).size.height *0.34,
+            decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+            child: Column(
+              children: [
+
+                Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                  child: Image.asset(images_liste_verticale[0],fit: BoxFit.cover,),))
+                ,Container(
+
+                  child: Column(
+
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                      Row(
+                        children: [
+                          Text(titre_liste_verticale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                        ],),
+
+
+                      SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                      Text(prix_liste_vertical[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                      SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                      Icon(Icons.shopping_cart)
+
+                    ],),)
+
+              ],),),
+          ),
+          GestureDetector(
+              child:
+              Container(
+                height: MediaQuery.of(context).size.height *0.34,
+                decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                child: Column(
+                  children: [
+
+                    Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                      child: Image.asset(images_liste_verticale[1],fit: BoxFit.cover,),))
+                    ,Container(
+
+                      child: Column(
+
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                          Row(children: [
+                            Text(titre_liste_verticale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                          ],),
+
+
+                          SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                          Text(prix_liste_vertical[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                          Icon(Icons.shopping_cart)
+
+                        ],),)
+
+                  ],),)),
+
+
+        ],),
+      SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GestureDetector(
+            child:
+            Container(
+              height: MediaQuery.of(context).size.height *0.34,
+              decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+              child: Column(
+                children: [
+
+                  Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                    child: Image.asset(images_liste_verticale[0],fit: BoxFit.cover,),))
+                  ,Container(
+
+                    child: Column(
+
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                        Row(
+                          children: [
+                            Text(titre_liste_verticale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                          ],),
+
+
+                        SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                        Text(prix_liste_vertical[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                        SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                        Icon(Icons.shopping_cart)
+
+                      ],),)
+
+                ],),),
+          ),
+          GestureDetector(
+              child:
+              Container(
+                height: MediaQuery.of(context).size.height *0.34,
+                decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                child: Column(
+                  children: [
+
+                    Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                      child: Image.asset(images_liste_verticale[1],fit: BoxFit.cover,),))
+                    ,Container(
+
+                      child: Column(
+
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                          Row(children: [
+                            Text(titre_liste_verticale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                          ],),
+
+
+                          SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                          Text(prix_liste_vertical[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                          Icon(Icons.shopping_cart)
+
+                        ],),)
+
+                  ],),)),
+
+
+        ],)
+
+
+  ],),
+),
+    ):Text("")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -419,7 +805,7 @@ valeur_redictrice_widget==2?Container(
 
 
 //Le menu du haut qui est fixe
-  Container(
+  ,Container(
     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.032),
     decoration: BoxDecoration(color: Colors.white),
     height: MediaQuery.of(context).size.height *0.12,

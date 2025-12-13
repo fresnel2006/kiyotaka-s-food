@@ -9,9 +9,9 @@ var index;
 }
 
 class _ProduitPageState extends State<ProduitPage> {
-  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
-  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","SPRIT"];
-  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,500];
+  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
+  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","FROMAGE AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES FROMAGE","CRÊPES NATURE","SPRIT","FANTA"];
+  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,1000,500,500];
 
   var prix_produit;
   void reduction_augmentation_prix(){
@@ -20,7 +20,7 @@ class _ProduitPageState extends State<ProduitPage> {
         prix_produit=1000;
       });
     }
-    else if (widget.index==1||widget.index==8){
+    else if (widget.index==1||widget.index==9||widget.index==10){
       setState(() {
         prix_produit=500;
       });
@@ -206,7 +206,12 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
             width: MediaQuery.of(context).size.width *0.9,
 
 
-            child: Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.05),),),
+            child:
+            widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):
+            widget.index==3||widget.index==5||widget.index==6||widget.index==7?Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.05),):
+            widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):
+            widget.index==1||widget.index==8?Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045))
+            ,),
           Container(
           decoration: BoxDecoration(
               color: Colors.deepOrangeAccent,
@@ -220,24 +225,36 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
             IconButton(onPressed: (){
-              if(widget.index==3||widget.index==6||widget.index==7){
+              if(widget.index==3||widget.index==5||widget.index==7){
                 if(prix_produit==2000){
                   setState(() {
                     prix_produit-=1000;
                   });
                 }
-
+              }
+              if(widget.index==8){
+                if(prix_produit==1500){
+                  setState(() {
+                    prix_produit-=500;
+                  });
+                }
               }
             }, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
               Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
               IconButton(onPressed: (){
-        if(widget.index==3||widget.index==6||widget.index==7){
+        if(widget.index==3||widget.index==5||widget.index==7){
           if(prix_produit==1000){
             setState(() {
               prix_produit+=1000;
             });
           }
-
+        }
+        if(widget.index==8){
+          if(prix_produit==1000){
+            setState(() {
+              prix_produit+=500;
+            });
+          }
         }
               }, icon: Icon(Icons.add,color: Colors.white,))
           ],),),
@@ -246,7 +263,6 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.9),
             height: MediaQuery.of(context).size.height *0.1,
             width: MediaQuery.of(context).size.width *1,
-
             decoration: BoxDecoration(
                 color: Colors.deepOrangeAccent,
               borderRadius: BorderRadius.only(topLeft:Radius.circular(MediaQuery.of(context).size.width *1),topRight: Radius.circular(MediaQuery.of(context).size.width *1))
