@@ -18,7 +18,7 @@ int valeur_redictrice_widget=1;
 //les differentes liste contenant les images de l'apk
 
   //images de la liste horizontale
-var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/Water _).jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
+var images_liste_horizontale=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Ceebu Yapp - beef or lamb variation, of the….jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes fromage.jpg","assets/images/Sprite Is No Longer Going to Be Sold in Green___.jpg"];
 
 //titres de la liste horizontale
 var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU"];
@@ -27,13 +27,13 @@ var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOC
 var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
 
 //images de la liste verticale
-var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/sprit.jpg","assets/images/fanta.jpg"];
+var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg"];
 
 //titres de la liste horizontale
-var titre_liste_verticale=["FROMAGE  CERELAC","CRÊPES  CHOCOLAT","CRÊPES FROMAGE","CRÊPES NATURE","SPRIT","FANTA","ORANGINA"];
+var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES VIANDE HACHEE","SPRIT","FANTA","ORANGINA"];
 
 //prix de la liste horizontale
-var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500-4000 FCFA","1000-1500 FCFA","500 FCFA","500 FCFA","500 FCFA"];
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500-4000 FCFA","1000-1500 FCFA","3500-4000 FCFA","500 FCFA","500 FCFA","500 FCFA"];
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +58,8 @@ body: Stack(
 
       //widget de l'image de kiyotaka's food
             valeur_redictrice_widget==2?Container(
+              alignment: AlignmentGeometry.center,
+              width: MediaQuery.of(context).size.width *1,
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
               child:  Image.asset("assets/images/mariame food.png",fit: BoxFit.cover,height: MediaQuery.of(context).size.height *0.18,width:MediaQuery.of(context).size.width *0.45
 
@@ -388,10 +390,10 @@ valeur_redictrice_widget==1?
                 decoration: BoxDecoration(border: Border.all(color: Colors.orange)),)
             ],):Text(""),
             valeur_redictrice_widget==1?Container(
-              height: MediaQuery.of(context).size.height *0.85,
+              height: MediaQuery.of(context).size.height *1,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 6,itemBuilder: (context, index) => GestureDetector(
+                itemCount: 7,itemBuilder: (context, index) => GestureDetector(
                 onTap: (){
                   setState(() {
                     int valeur=index+4;
@@ -589,10 +591,66 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                   ],),)),
 
+        ],),
+      SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            child:
+            Container(
+              height: MediaQuery.of(context).size.height *0.34,
+              width: MediaQuery.of(context).size.width *0.52,
+              decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+              child: Column(
+                children: [
+
+                  Container(
+                      height: MediaQuery.of(context).size.height *0.19,
+                      width: MediaQuery.of(context).size.width *0.52,
+                      child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                    child: Image.asset(images_liste_verticale[4],fit: BoxFit.cover,),))
+                  ,Container(
+
+                    child: Column(
+
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(titre_liste_verticale[4],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                          ],),
+
+
+                        SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                        Text(prix_liste_vertical[4],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                        SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                        Icon(Icons.shopping_cart)
+
+                      ],),)
+
+                ],),),
+          ),
+
+
+
         ],)
 
 
     ],),)):Text(""),
+
+
+
+
+
+
+
+
+
+
 
     valeur_redictrice_widget==3?Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
@@ -683,7 +741,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                   Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                    child: Image.asset(images_liste_verticale[0],fit: BoxFit.cover,),))
+                    child: Image.asset(images_liste_verticale[2],fit: BoxFit.cover,),))
                   ,Container(
 
                     child: Column(
@@ -692,13 +750,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                         SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                         Row(
                           children: [
-                            Text(titre_liste_verticale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                            Text(titre_liste_verticale[2],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                           ],),
 
 
                         SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                        Text(prix_liste_vertical[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                        Text(prix_liste_vertical[2],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                         SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                         Icon(Icons.shopping_cart)
 
@@ -716,7 +774,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                     Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                      child: Image.asset(images_liste_verticale[1],fit: BoxFit.cover,),))
+                      child: Image.asset(images_liste_verticale[3],fit: BoxFit.cover,),))
                     ,Container(
 
                       child: Column(
@@ -724,13 +782,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                         children: [
                           SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                           Row(children: [
-                            Text(titre_liste_verticale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
-
+                            Text(titre_liste_verticale[3],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
                           ],),
 
 
                           SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                          Text(prix_liste_vertical[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          Text(prix_liste_vertical[3],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                           SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                           Icon(Icons.shopping_cart)
 
@@ -739,7 +796,8 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                   ],),)),
 
 
-        ],)
+        ],),
+
 
 
   ],),
