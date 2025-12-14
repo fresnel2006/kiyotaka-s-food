@@ -36,7 +36,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
       final url = Uri.parse("https://wa.me/2250789734299");
       await launchUrl(url, mode: LaunchMode.externalApplication);
     }catch(e){
-      print("Erreur sur le lien vers le compte whatsapp");
+      print("Erreur sur le lien vers le compte whatsapp sur la page d'inscription");
     }
     }
     //fonctions permettant de faire afficher un message d'erreur

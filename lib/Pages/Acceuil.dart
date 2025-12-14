@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiyotaka_s_food/Pages/Produit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AcceuilPage extends StatefulWidget {
   const AcceuilPage({super.key});
@@ -30,11 +31,22 @@ var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA",
 var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/autreboissons.jpg","assets/images/tchepe poulet.jpg"];
 
 //titres de la liste horizontale
-var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","AUTRES BOISSONS"];
+var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","AUTRES BOISSONS","TCHÊPE POULET"];
 
 //prix de la liste horizontale
-var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","1000-1500 FCFA","4000 FCFA","500 FCFA","500 FCFA","500 FCFA","VARIANT"];
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","1000-1500 FCFA","4000 FCFA","500 FCFA","500 FCFA","500 FCFA","VARIANT","1000 FCFA"];
 
+//fonction pour ramener vers le lien whatsapp de dogbe
+
+  Future <void> lancer_whatsapp() async{
+    try {
+      final url = Uri.parse("https://wa.me/2250789734299");
+      var whatsapp = launchUrl(url,
+          mode: LaunchMode.externalApplication);
+    }catch(e){
+      print("Probleme sur le lien pour aller vers numero whatsapp dans la page d'accueille");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var index;
@@ -309,7 +321,7 @@ valeur_redictrice_widget==1?
                     },
                     child:
                   Container(
-    height: MediaQuery.of(context).size.height *0.34,
+            height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -457,7 +469,14 @@ valeur_redictrice_widget==2?Container(
     Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
-      GestureDetector(child:
+      GestureDetector(
+        onTap:(){
+          setState(() {
+            index=5;
+          });
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+        },
+        child:
     Container(
     height: MediaQuery.of(context).size.height *0.34,
     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
@@ -490,6 +509,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     ],),),
       ),
     GestureDetector(
+        onTap:(){
+          setState(() {
+            index=6;
+          });
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+        },
       child:
     Container(
     height: MediaQuery.of(context).size.height *0.34,
@@ -526,7 +551,14 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          GestureDetector(child:
+          GestureDetector(
+            onTap:(){
+              setState(() {
+                index=7;
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+            },
+            child:
           Container(
             height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
@@ -560,6 +592,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               ],),),
           ),
           GestureDetector(
+              onTap:(){
+                setState(() {
+                  index=8;
+                });
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+              },
               child:
               Container(
                 height: MediaQuery.of(context).size.height *0.34,
@@ -596,7 +634,14 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          GestureDetector(child:
+          GestureDetector(
+            onTap:(){
+              setState(() {
+                index=9;
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+            },
+            child:
           Container(
             height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
@@ -689,6 +734,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
+            onTap:(){
+              setState(() {
+                index=10;
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+            },
             child:
           Container(
             height: MediaQuery.of(context).size.height *0.34,
@@ -722,6 +773,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               ],),),
           ),
           GestureDetector(
+              onTap:(){
+                setState(() {
+                  index=11;
+                });
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+              },
               child:
               Container(
                 height: MediaQuery.of(context).size.height *0.34,
@@ -760,6 +817,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
+            onTap:(){
+              setState(() {
+                index=12;
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+    },
             child:
             Container(
               height: MediaQuery.of(context).size.height *0.34,
@@ -793,6 +856,9 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                 ],),),
           ),
           GestureDetector(
+            onTap: () async {
+              await lancer_whatsapp();
+            },
               child:
               Container(
                 height: MediaQuery.of(context).size.height *0.34,
@@ -854,6 +920,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
+                  onTap:(){
+                    setState(() {
+                      index=0;
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+                  },
                   child:
                   Container(
                     height: MediaQuery.of(context).size.height *0.34,
@@ -887,6 +959,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                       ],),),
                 ),
                 GestureDetector(
+    onTap:(){
+    setState(() {
+    index=2;
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+    },
                     child:
                     Container(
                       height: MediaQuery.of(context).size.height *0.34,
@@ -925,6 +1003,12 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
+    onTap:(){
+    setState(() {
+    index=13;
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
+    },
                   child:
                   Container(
                     height: MediaQuery.of(context).size.height *0.34,
@@ -943,13 +1027,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                               SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                               Row(
                                 children: [
-                                  Text(titre_liste_verticale[7],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                                  Text(titre_liste_verticale[9],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                                 ],),
 
 
                               SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                              Text(prix_liste_vertical[7],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                              Text(prix_liste_vertical[9],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                               SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                               Icon(Icons.shopping_cart)
 
@@ -958,16 +1042,19 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                       ],),),
                 ),
                 GestureDetector(
+                  onTap: (){
+
+                  },
                     child:
                     Container(
                       height: MediaQuery.of(context).size.height *0.34,
-                      decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                      decoration: BoxDecoration(border: Border.all(color: Colors.white),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                       child: Column(
                         children: [
 
                           Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                            child: Image.asset(images_liste_verticale[8],fit: BoxFit.cover,),))
+                            child: Text(""),))
                           ,Container(
 
                             child: Column(
@@ -975,21 +1062,21 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                               children: [
                                 SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                                 Row(children: [
-                                  Text(titre_liste_verticale[8],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                                  Text("",style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
                                 ],),
 
 
                                 SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                                Text(prix_liste_vertical[8],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                                Text("",style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                                 SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                                 Container(
                                     width: MediaQuery.of(context).size.width *0.3,
                                     height:MediaQuery.of(context).size.height *0.04 ,
                                     decoration: BoxDecoration(
-                                        color: Colors.green,
+
                                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))
                                     ),
-                                    child: Icon(FontAwesomeIcons.whatsapp,color: Colors.white,))
+                                   )
 
                               ],),)
 

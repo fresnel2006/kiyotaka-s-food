@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProduitPage extends StatefulWidget {
   ProduitPage({super.key, required this.index});
@@ -7,11 +8,16 @@ var index;
   @override
   State<ProduitPage> createState() => _ProduitPageState();
 }
+List<String> image_favoris=[];
+List<String> titre_favoris=[];
+List<String> prix_favoris=[];
 
 class _ProduitPageState extends State<ProduitPage> {
-  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg"];
-  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","SPRIT","FANTA"];
-  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,1000,500,500];
+
+  bool valeur_ajout=false;
+  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
+  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
+  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,1000,4000,500,500,500,1000];
 
   var prix_produit;
   void reduction_augmentation_prix(){
@@ -20,7 +26,7 @@ class _ProduitPageState extends State<ProduitPage> {
         prix_produit=1000;
       });
     }
-    else if (widget.index==1||widget.index==9||widget.index==10){
+    else if (widget.index==1||widget.index==11||widget.index==10||widget.index==12){
       setState(() {
         prix_produit=500;
       });
@@ -35,6 +41,11 @@ class _ProduitPageState extends State<ProduitPage> {
         prix_produit=200;
       });
     }
+    else if (widget.index==9){
+      setState(() {
+        prix_produit=4000;
+      });
+    }
     else{
       setState(() {
         prix_produit=1000;
@@ -42,6 +53,31 @@ class _ProduitPageState extends State<ProduitPage> {
     }
 
   }
+
+  Future <void> sauvegarder_produit_favoris()async{
+
+      final perfs = await SharedPreferences.getInstance();
+      await perfs.setStringList("image_favoris", image_favoris);
+      await perfs.setStringList("titre_favoris", titre_favoris);
+      await perfs.setStringList("prix_favoris", prix_favoris);
+
+    }
+void ajouter_retirer_en_favoris(int index)async {
+    if(valeur_ajout==true){
+      setState(() {
+        image_favoris.add(images[index]);
+        titre_favoris.add(titre[index]);
+        prix_favoris.add("$prix_produit");
+      });
+      await sauvegarder_produit_favoris();
+      print(prix_favoris.toString());
+      print(image_favoris.toString());
+      print(titre_favoris.toString());
+
+
+    }
+
+}
 
   @override
   void initState(){
@@ -140,7 +176,14 @@ color: Colors.deepOrangeAccent
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.04,left: MediaQuery.of(context).size.width *0.9),
 
-            child: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.heart,color: Colors.deepOrangeAccent,)) ,),
+            child: IconButton(onPressed: (){
+              setState(() {
+                valeur_ajout=!valeur_ajout;
+              });
+              int index_fonction=widget.index;
+              ajouter_retirer_en_favoris(index_fonction);
+
+            }, icon: valeur_ajout?Icon(CupertinoIcons.heart_fill,color: Colors.deepOrangeAccent,):Icon(CupertinoIcons.heart,color: Colors.deepOrangeAccent,)) ,),
           Container(
            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.36),
             child: Column(
@@ -225,7 +268,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
             IconButton(onPressed: (){
-              if(widget.index==3||widget.index==5||widget.index==7){
+              if(widget.index==3||widget.index==5||widget.index==7||widget.index==6){
                 if(prix_produit==2000){
                   setState(() {
                     prix_produit-=1000;
@@ -242,7 +285,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
             }, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
               Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
               IconButton(onPressed: (){
-        if(widget.index==3||widget.index==5||widget.index==7){
+        if(widget.index==3||widget.index==5||widget.index==7||widget.index==6){
           if(prix_produit==1000){
             setState(() {
               prix_produit+=1000;
