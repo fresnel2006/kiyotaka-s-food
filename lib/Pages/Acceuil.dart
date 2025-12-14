@@ -27,13 +27,13 @@ var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOC
 var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
 
 //images de la liste verticale
-var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg"];
+var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/autreboissons.jpg","assets/images/tchepe poulet.jpg"];
 
 //titres de la liste horizontale
-var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES VIANDE HACHEE","SPRIT","FANTA","ORANGINA"];
+var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","AUTRES BOISSONS"];
 
 //prix de la liste horizontale
-var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500-4000 FCFA","1000-1500 FCFA","3500-4000 FCFA","500 FCFA","500 FCFA","500 FCFA"];
+var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","1000-1500 FCFA","4000 FCFA","500 FCFA","500 FCFA","500 FCFA","VARIANT"];
 
   @override
   Widget build(BuildContext context) {
@@ -594,46 +594,74 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
         ],),
       SizedBox(height: MediaQuery.of(context).size.height *0.02,),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          GestureDetector(
-            child:
-            Container(
-              height: MediaQuery.of(context).size.height *0.34,
-              width: MediaQuery.of(context).size.width *0.52,
-              decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
-              child: Column(
-                children: [
+          GestureDetector(child:
+          Container(
+            height: MediaQuery.of(context).size.height *0.34,
+            decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+            child: Column(
+              children: [
 
-                  Container(
-                      height: MediaQuery.of(context).size.height *0.19,
-                      width: MediaQuery.of(context).size.width *0.52,
-                      child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                    child: Image.asset(images_liste_verticale[4],fit: BoxFit.cover,),))
-                  ,Container(
+                Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                  child: Image.asset(images_liste_verticale[4],fit: BoxFit.cover,),))
+                ,Container(
 
-                    child: Column(
+                  child: Column(
 
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height *0.023,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(titre_liste_verticale[4],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                      Row(
+                        children: [
 
-                          ],),
+                          Text(titre_liste_verticale[4],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                        ],),
 
 
-                        SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                        Text(prix_liste_vertical[4],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
-                        SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
-                        Icon(Icons.shopping_cart)
+                      SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                      Text(prix_liste_vertical[4],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                      SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                      Icon(Icons.shopping_cart)
 
-                      ],),)
+                    ],),)
 
-                ],),),
+              ],),),
           ),
+          GestureDetector(child:
+          Container(
+            height: MediaQuery.of(context).size.height *0.34,
+            decoration: BoxDecoration(border: Border.all(color: Colors.white),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+            child: Column(
+              children: [
+
+                Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                  child: Text(""),))
+                ,Container(
+
+                  child: Column(
+
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                      Row(
+                        children: [
+
+                          Text("",style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                        ],),
+
+
+                      SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                      Text("",style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                      SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+
+
+                    ],),)
+
+              ],),),
+          )
 
 
 
@@ -670,7 +698,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                 Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                  child: Image.asset(images_liste_verticale[0],fit: BoxFit.cover,),))
+                  child: Image.asset(images_liste_verticale[5],fit: BoxFit.cover,),))
                 ,Container(
 
                   child: Column(
@@ -679,13 +707,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                       SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                       Row(
                         children: [
-                          Text(titre_liste_verticale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                          Text(titre_liste_verticale[5],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                         ],),
 
 
                       SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                      Text(prix_liste_vertical[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                      Text(prix_liste_vertical[5],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                       SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                       Icon(Icons.shopping_cart)
 
@@ -703,7 +731,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                     Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                      child: Image.asset(images_liste_verticale[1],fit: BoxFit.cover,),))
+                      child: Image.asset(images_liste_verticale[6],fit: BoxFit.cover,),))
                     ,Container(
 
                       child: Column(
@@ -711,13 +739,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                         children: [
                           SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                           Row(children: [
-                            Text(titre_liste_verticale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                            Text(titre_liste_verticale[6],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                           ],),
 
 
                           SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                          Text(prix_liste_vertical[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          Text(prix_liste_vertical[6],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                           SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                           Icon(Icons.shopping_cart)
 
@@ -741,7 +769,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                   Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                    child: Image.asset(images_liste_verticale[2],fit: BoxFit.cover,),))
+                    child: Image.asset(images_liste_verticale[7],fit: BoxFit.cover,),))
                   ,Container(
 
                     child: Column(
@@ -750,13 +778,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                         SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                         Row(
                           children: [
-                            Text(titre_liste_verticale[2],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                            Text(titre_liste_verticale[7],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                           ],),
 
 
                         SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                        Text(prix_liste_vertical[2],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                        Text(prix_liste_vertical[7],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                         SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                         Icon(Icons.shopping_cart)
 
@@ -774,7 +802,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
                     Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
-                      child: Image.asset(images_liste_verticale[3],fit: BoxFit.cover,),))
+                      child: Image.asset(images_liste_verticale[8],fit: BoxFit.cover,),))
                     ,Container(
 
                       child: Column(
@@ -782,14 +810,21 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                         children: [
                           SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                           Row(children: [
-                            Text(titre_liste_verticale[3],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                            Text(titre_liste_verticale[8],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
                           ],),
 
 
                           SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                          Text(prix_liste_vertical[3],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                          Text(prix_liste_vertical[8],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                           SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
-                          Icon(Icons.shopping_cart)
+                          Container(
+                            width: MediaQuery.of(context).size.width *0.3,
+                              height:MediaQuery.of(context).size.height *0.04 ,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))
+                              ),
+                              child: Icon(FontAwesomeIcons.whatsapp,color: Colors.white,))
 
                         ],),)
 
@@ -802,6 +837,171 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
   ],),
 ),
+    ):Text(""),
+
+
+
+
+
+
+
+    valeur_redictrice_widget==4?Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  child:
+                  Container(
+                    height: MediaQuery.of(context).size.height *0.34,
+                    decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                    child: Column(
+                      children: [
+
+                        Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                          child: Image.asset(images_liste_horizontale[0],fit: BoxFit.cover,),))
+                        ,Container(
+
+                          child: Column(
+
+                            children: [
+                              SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                              Row(
+                                children: [
+                                  Text(titre_liste_horizontale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                                ],),
+
+
+                              SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                              Text(prix_liste_horizontale[0],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                              SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                              Icon(Icons.shopping_cart)
+
+                            ],),)
+
+                      ],),),
+                ),
+                GestureDetector(
+                    child:
+                    Container(
+                      height: MediaQuery.of(context).size.height *0.34,
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                      child: Column(
+                        children: [
+
+                          Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                            child: Image.asset(images_liste_horizontale[3],fit: BoxFit.cover,),))
+                          ,Container(
+
+                            child: Column(
+
+                              children: [
+                                SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                                Row(children: [
+                                  Text(titre_liste_horizontale[3],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                                ],),
+
+
+                                SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                                Text(prix_liste_horizontale[3],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                                SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                                Icon(Icons.shopping_cart)
+
+                              ],),)
+
+                        ],),)),
+
+
+              ],),
+            SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  child:
+                  Container(
+                    height: MediaQuery.of(context).size.height *0.34,
+                    decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                    child: Column(
+                      children: [
+
+                        Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                          child: Image.asset(images_liste_verticale[9],fit: BoxFit.cover,),))
+                        ,Container(
+
+                          child: Column(
+
+                            children: [
+                              SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                              Row(
+                                children: [
+                                  Text(titre_liste_verticale[7],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+
+                                ],),
+
+
+                              SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                              Text(prix_liste_vertical[7],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                              SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                              Icon(Icons.shopping_cart)
+
+                            ],),)
+
+                      ],),),
+                ),
+                GestureDetector(
+                    child:
+                    Container(
+                      height: MediaQuery.of(context).size.height *0.34,
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                      child: Column(
+                        children: [
+
+                          Container(height: MediaQuery.of(context).size.height *0.19,width: MediaQuery.of(context).size.width *0.45,child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03)),
+                            child: Image.asset(images_liste_verticale[8],fit: BoxFit.cover,),))
+                          ,Container(
+
+                            child: Column(
+
+                              children: [
+                                SizedBox(height: MediaQuery.of(context).size.height *0.023,),
+                                Row(children: [
+                                  Text(titre_liste_verticale[8],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                                ],),
+
+
+                                SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+                                Text(prix_liste_vertical[8],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                                SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
+                                Container(
+                                    width: MediaQuery.of(context).size.width *0.3,
+                                    height:MediaQuery.of(context).size.height *0.04 ,
+                                    decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))
+                                    ),
+                                    child: Icon(FontAwesomeIcons.whatsapp,color: Colors.white,))
+
+                              ],),)
+
+                        ],),)),
+
+
+              ],),
+
+
+
+          ],),
+      ),
     ):Text("")
 
 
@@ -846,14 +1046,34 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
 
 
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
