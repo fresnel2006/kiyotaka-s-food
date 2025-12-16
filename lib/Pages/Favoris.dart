@@ -75,7 +75,9 @@ class _FavorisPageState extends State<FavorisPage> {
     children: [
       Text("Favoris",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04,color: Colors.orange),),
 
-    ],),),
+    ],
+                    ),
+                  ),
                   Container(width: MediaQuery.of(context).size.width *0.3,
                     height: MediaQuery.of(context).size.height *0.0015,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
