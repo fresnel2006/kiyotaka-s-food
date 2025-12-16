@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/animation.dart';
 
 class ProduitPage extends StatefulWidget {
   ProduitPage({super.key, required this.index});
@@ -8,13 +10,14 @@ var index;
   @override
   State<ProduitPage> createState() => _ProduitPageState();
 }
+
 List<String> image_favoris=[];
 List<String> titre_favoris=[];
 List<String> prix_favoris=[];
+int index_fonction=0;
 
 class _ProduitPageState extends State<ProduitPage> {
-
-  bool valeur_ajout=false;
+  bool coeur=false;
   var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
   var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
   var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,1000,4000,500,500,500,1000];
@@ -55,47 +58,46 @@ class _ProduitPageState extends State<ProduitPage> {
   }
 
   Future <void> sauvegarder_produit_favoris()async{
-
       final perfs = await SharedPreferences.getInstance();
       await perfs.setStringList("image_favoris", image_favoris);
       await perfs.setStringList("titre_favoris", titre_favoris);
       await perfs.setStringList("prix_favoris", prix_favoris);
+  }
+  Future <void> charger_donnee() async{
+    final perfs = await SharedPreferences.getInstance();
+    setState(() {
+      image_favoris=perfs.getStringList("image_favoris")??[];
+      titre_favoris=perfs.getStringList("titre_favoris")??[];
+      prix_favoris=perfs.getStringList("prix_favoris")??[];
+    });
 
-    }
-void ajouter_retirer_en_favoris(int index)async {
-    if(valeur_ajout==true){
+  }
+  Future <void> ajouter_coeur()async{
+    if(image_favoris.contains(images[widget.index])){
       setState(() {
-        image_favoris.add(images[index]);
-        titre_favoris.add(titre[index]);
-        prix_favoris.add("$prix_produit");
+        coeur=true;
       });
-      await sauvegarder_produit_favoris();
-      print(prix_favoris.toString());
-      print(image_favoris.toString());
-      print(titre_favoris.toString());
-
-
-    }
-
-}
-
+    };
+  }
   @override
   void initState(){
     super.initState();
     reduction_augmentation_prix();
+    charger_donnee();
+    ajouter_coeur();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Stack(children: [
+          Stack(
+            children: [
             Container(
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
               height: MediaQuery.of(context).size.height *0.32,
               width: MediaQuery.of(context).size.width *1,
               child: Image.asset(images[widget.index],fit: BoxFit.cover,),),
-
                 Container(
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
                   height: MediaQuery.of(context).size.height *0.32,
@@ -176,15 +178,36 @@ color: Colors.deepOrangeAccent
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.04,left: MediaQuery.of(context).size.width *0.9),
 
-            child: IconButton(onPressed: (){
-              setState(() {
-                valeur_ajout=!valeur_ajout;
-              });
-              int index_fonction=widget.index;
-              ajouter_retirer_en_favoris(index_fonction);
-
-            }, icon: valeur_ajout?Icon(CupertinoIcons.heart_fill,color: Colors.deepOrangeAccent,):Icon(CupertinoIcons.heart,color: Colors.deepOrangeAccent,)) ,),
-          Container(
+            child: coeur==false?IconButton(onPressed: ()async{
+setState(() {
+  coeur=!coeur;
+  index_fonction=widget.index;
+});
+if(coeur){
+  image_favoris.add(images[index_fonction]);
+  titre_favoris.add(titre[index_fonction]);
+  prix_favoris.add(prix_produit.toString());
+  print(image_favoris);
+  print(titre_favoris);
+  print(prix_favoris);
+  print("liked");
+  await sauvegarder_produit_favoris();
+}
+else{
+  image_favoris.removeAt(index_fonction);
+  titre_favoris.removeAt(index_fonction);
+  prix_favoris.remove(prix_produit.toString());
+  print(image_favoris);
+  print(titre_favoris);
+  print(prix_favoris);
+  print("not liked");
+  await sauvegarder_produit_favoris();
+}
+            }, icon: coeur?Icon(CupertinoIcons.heart_fill,color: Colors.deepOrangeAccent):Icon(CupertinoIcons.heart,color: Colors.deepOrangeAccent)):
+            Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.01,left: MediaQuery.of(context).size.width *0.025),
+              child: Icon(CupertinoIcons.heart_fill,color: Colors.deepOrangeAccent,).animate().scale(begin: Offset(0, 0),end: Offset(3, 3),duration: Duration(seconds: 1)).fadeOut(duration: Duration(seconds: 1)) ,),
+          ),Container(
            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.36),
             child: Column(
             children: [
@@ -203,7 +226,6 @@ Container(
                   Text("PRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 )),
                   Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
                 ],),),
-
 
 
               
@@ -245,7 +267,6 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
           Container(
 
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.55,left: MediaQuery.of(context).size.width *0.05),
-
             width: MediaQuery.of(context).size.width *0.9,
 
 

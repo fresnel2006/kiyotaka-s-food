@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
+import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class FavorisPage extends StatefulWidget {
   const FavorisPage({super.key});
@@ -29,6 +34,12 @@ class _FavorisPageState extends State<FavorisPage> {
     }
   }
 
+  Future <void> sauvegarder_produit_favoris()async{
+    final perfs = await SharedPreferences.getInstance();
+    await perfs.setStringList("image_favoris", image_favoris);
+    await perfs.setStringList("titre_favoris", titre_favoris);
+    await perfs.setStringList("prix_favoris", prix_favoris);
+  }
   @override
   void initState(){
     super.initState();
@@ -44,13 +55,13 @@ class _FavorisPageState extends State<FavorisPage> {
         Column(
           children: [
           Container(width: MediaQuery.of(context).size.width *1),
-          Container(child: Image.asset("assets/images/kiyotaka image entreprise.png",height: MediaQuery.of(context).size.height *0.4,width: MediaQuery.of(context).size.width *1,),),
+          Container(child: image_favoris.isNotEmpty?Image.asset("assets/images/kiyotaka image entreprise.png",height: MediaQuery.of(context).size.height *0.4,width: MediaQuery.of(context).size.width *1,):Text(""),),
 
         ],),
           Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height *0.33,),
-              Row(
+              image_favoris.isNotEmpty?SizedBox(height: MediaQuery.of(context).size.height *0.33,):SizedBox(height: MediaQuery.of(context).size.height *0.06,),
+              image_favoris.isNotEmpty?Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
@@ -58,23 +69,34 @@ class _FavorisPageState extends State<FavorisPage> {
                     height: MediaQuery.of(context).size.height *0.0015,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                   ),
-                  Container(child: Text("Favoris",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04,color: Colors.orange),),),
+                  Container(
+
+                    child: Column(
+    children: [
+      Text("Favoris",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04,color: Colors.orange),),
+
+    ],),),
                   Container(width: MediaQuery.of(context).size.width *0.3,
                     height: MediaQuery.of(context).size.height *0.0015,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                   )
-                ],),
+                ],):Container(
+                margin: EdgeInsets.only(left: MediaQuery.of(context).size.width *0.1),
+                alignment: Alignment.topLeft,
+                child: Column(
+                  children: [
+                    Text("FAVORIS",style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.07),),
+                    Container(
+                      width: MediaQuery.of(context).size.width *0.3,
+                      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.orange,width: MediaQuery.of(context).size.width *0.01))),)
+    ],
+                ),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width *1,
                 height: MediaQuery.of(context).size.height *0.54,
-              child: ListView.builder(itemCount: 0,itemBuilder: (context, index) => GestureDetector(
-    onTap: (){
-    setState(() {
-    int valeur=index+4;
-    index=valeur+1;
-    });
+              child: image_favoris.isNotEmpty?ListView.builder(itemCount: image_favoris.length,itemBuilder: (context, index) => GestureDetector(
 
-    },
     child: Container(
     margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.012,left: MediaQuery.of(context).size.width *0.02),
     child: Row(
@@ -84,12 +106,12 @@ class _FavorisPageState extends State<FavorisPage> {
     width: MediaQuery.of(context).size.width *0.35,
     child: ClipRRect(
     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
-    child: Text(""),),
+    child: Image.asset(image_favoris[index],fit: BoxFit.cover,),),
     ),
     SizedBox(width: MediaQuery.of(context).size.width *0.06,),
     Stack(
     children: [
-    Text("\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
+    Text("${titre_favoris[index]}\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
     Container(
     height: MediaQuery.of(context).size.height *0.04,
     width: MediaQuery.of(context).size.width *0.5,
@@ -102,8 +124,19 @@ class _FavorisPageState extends State<FavorisPage> {
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-    Text("",style:TextStyle(fontFamily: "Poppins",color: Colors.orange) ,),
-    Icon(Icons.shopping_cart_checkout_rounded)
+    Text("${prix_favoris[index]} FCFA",style:TextStyle(fontFamily: "Poppins",color: Colors.orange) ,),
+    IconButton(onPressed: ()async{
+      image_favoris.removeAt(index);
+      titre_favoris.removeAt(index);
+      prix_favoris.removeAt(index);
+      print(image_favoris);
+      print(titre_favoris);
+      print(prix_favoris);
+      print("not liked");
+      await sauvegarder_produit_favoris();
+      await charger_produit_favoris();
+    }, icon: Icon(CupertinoIcons.heart_slash,color: Colors.orange,))
+
     ],),),
 
 
@@ -111,7 +144,20 @@ class _FavorisPageState extends State<FavorisPage> {
 
     )
 
-    ],),),),),
+    ],),),),):Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height *0.1),
+                  Container(
+                    height: MediaQuery.of(context).size.height *0.25,
+                    child: Lottie.asset("assets/animations/Frying Pan Breakfast.json"),),
+                  SizedBox(height: MediaQuery.of(context).size.height *0),
+                  Container(child: Text("VEUILLEZ AJOUTER \nUN PRODUIT EN FAVORIS",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black,fontSize: MediaQuery.of(context).size.width *0.035),),),
+                  SizedBox(height: MediaQuery.of(context).size.height *0.035),
+                  Container(child:ElevatedButton(onPressed: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>MainscreenPage()));
+    }, child: Text("AJOUTER PRODUIT",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.035)),style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrangeAccent),) ,)
+                ],
+              )
 
               )
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiyotaka_s_food/Pages/Produit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AcceuilPage extends StatefulWidget {
@@ -12,7 +13,15 @@ class AcceuilPage extends StatefulWidget {
 }
 
 class _AcceuilPageState extends State<AcceuilPage> {
+  Future <void> charger_donnee() async{
+    final perfs = await SharedPreferences.getInstance();
+    setState(() {
+      image_favoris=perfs.getStringList("image_favoris")??[];
+      titre_favoris=perfs.getStringList("titre_favoris")??[];
+      prix_favoris=perfs.getStringList("prix_favoris")??[];
+    });
 
+  }
 //variable de redirections redirigeant vers les differents contenaire tous, crepes,boissons,midi
 int valeur_redictrice_widget=1;
 
@@ -46,6 +55,11 @@ var prix_liste_vertical=["1000-2000 FCFA","1000-2000 FCFA","3500 FCFA","1000-150
     }catch(e){
       print("Probleme sur le lien pour aller vers numero whatsapp dans la page d'accueille");
     }
+  }
+  @override
+  void initState(){
+    super.initState();
+    charger_donnee();
   }
   @override
   Widget build(BuildContext context) {
