@@ -996,13 +996,13 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                               children: [
                                 SizedBox(height: MediaQuery.of(context).size.height *0.023,),
                                 Row(children: [
-                                  Text(titre_liste_horizontale[3],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+                                  Text(titre_liste_horizontale[2],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
 
                                 ],),
 
 
                                 SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-                                Text(prix_liste_horizontale[3],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
+                                Text(prix_liste_horizontale[2],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                                 SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                                 Icon(Icons.shopping_cart)
 
