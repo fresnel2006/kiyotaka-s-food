@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/animation.dart';
 
@@ -78,6 +79,52 @@ class _ProduitPageState extends State<ProduitPage> {
         coeur=true;
       });
     };
+  }
+
+  Future <void> commande()async{
+
+    showModalBottomSheet(backgroundColor:Colors.white,context: context, builder: (context)=>Container(
+        height: MediaQuery.of(context).size.height *0.7,
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width *1,
+            ),
+           SizedBox(height: MediaQuery.of(context).size.height *0.035,),
+            Text("${titre[widget.index]}",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06,color: Colors.green),),
+            Lottie.asset("assets/animations/chef.json",height: MediaQuery.of(context).size.height *0.25),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Text("QUANTITE : ",style: TextStyle(fontFamily: "Poppins")),
+                    ),
+
+                Container(
+                  child:    Text("0",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange),)
+                  ,)
+            ],),
+            SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Text("PRIX : ",style: TextStyle(fontFamily: "Poppins")),
+                    ),
+                SizedBox(width: MediaQuery.of(context).size.width *0.15,),
+                Container(
+                  height: MediaQuery.of(context).size.height *0.06,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      border: Border.all(color: Colors.black)
+                  ),),
+                SizedBox(width: MediaQuery.of(context).size.width *0.1,),
+                Container(
+                  child:  Text("1000 FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange),)
+                  ,),
+
+              ],)
+          ],)));
   }
   @override
   void initState(){
@@ -322,7 +369,11 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
         }
               }, icon: Icon(Icons.add,color: Colors.white,))
           ],),),
-          Container(
+          GestureDetector(
+onTap: (){
+  commande();
+},
+              child: Container(
             alignment: AlignmentGeometry.center,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.9),
             height: MediaQuery.of(context).size.height *0.1,
@@ -332,7 +383,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
               borderRadius: BorderRadius.only(topLeft:Radius.circular(MediaQuery.of(context).size.width *1),topRight: Radius.circular(MediaQuery.of(context).size.width *1))
             ),
             child: Text("COMMANDER",style: TextStyle(color: Colors.white,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06),),
-          )
+          ))
       ],
       ),
     );
