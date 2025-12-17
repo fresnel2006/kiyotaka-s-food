@@ -23,9 +23,7 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
         body: Pages[index],
         bottomNavigationBar: Container(
           height: MediaQuery.of(context).size.height *0.08,
-
           child: Container(
-
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

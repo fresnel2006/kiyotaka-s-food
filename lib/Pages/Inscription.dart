@@ -144,9 +144,11 @@ void affichermotdepasse(){
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(child: Stack(children: [
-
-        Column(children: [
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+        Column(
+          children: [
           
           Container(width: MediaQuery.of(context).size.width *1,),
           //image de fond de kiyotaka's food

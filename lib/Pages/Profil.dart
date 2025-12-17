@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kiyotaka_s_food/Pages/Modification.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key});
@@ -20,7 +21,6 @@ class _ProfilPageState extends State<ProfilPage> {
             width: MediaQuery.of(context).size.width *1,
             height: MediaQuery.of(context).size.height *0.4,
             child: Image.asset("assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg",fit: BoxFit.cover,),
-
           ),
           Container(
 
@@ -126,6 +126,9 @@ class _ProfilPageState extends State<ProfilPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                 GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ModificationPage()));
+                  },
                   child:
                   Container(
                   alignment: AlignmentGeometry.center,

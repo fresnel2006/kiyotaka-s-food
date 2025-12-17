@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiyotaka_s_food/Pages/Produit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -1192,6 +1193,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(onPressed: (){
+          ZoomDrawer.of(context)!.toggle();
         }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.1,)),
         Row(children: [
           Icon(Icons.local_restaurant ,size:MediaQuery.of(context).size.width *0.09),
