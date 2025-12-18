@@ -205,7 +205,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.03,),
 valeur_redictrice_widget==1?
     
             Container(
-              height: MediaQuery.of(context).size.height *0.3,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -219,7 +218,6 @@ valeur_redictrice_widget==1?
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
                     },
                     child: Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -257,7 +255,6 @@ valeur_redictrice_widget==1?
     Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index:index)));
     },
                     child: Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -296,7 +293,6 @@ valeur_redictrice_widget==1?
                     },
                     child:
                   Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -336,8 +332,7 @@ valeur_redictrice_widget==1?
                     },
                     child:
                   Container(
-            height: MediaQuery.of(context).size.height *0.34,
-                    decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
+                   decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
 
@@ -373,7 +368,6 @@ valeur_redictrice_widget==1?
                     },
                     child:
                   Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -493,7 +487,6 @@ valeur_redictrice_widget==2?Container(
         },
         child:
     Container(
-    height: MediaQuery.of(context).size.height *0.34,
     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
     child: Column(
     children: [
@@ -532,7 +525,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
         },
       child:
     Container(
-    height: MediaQuery.of(context).size.height *0.34,
     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
     child: Column(
     children: [
@@ -575,7 +567,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
             },
             child:
           Container(
-            height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
             child: Column(
               children: [
@@ -615,7 +606,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               },
               child:
               Container(
-                height: MediaQuery.of(context).size.height *0.34,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                 child: Column(
                   children: [
@@ -658,7 +648,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
             },
             child:
           Container(
-            height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
             child: Column(
               children: [
@@ -691,7 +680,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
           ),
           GestureDetector(child:
           Container(
-            height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.white),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
             child: Column(
               children: [
@@ -757,7 +745,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
             },
             child:
           Container(
-            height: MediaQuery.of(context).size.height *0.34,
             decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
             child: Column(
               children: [
@@ -796,7 +783,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
               },
               child:
               Container(
-                height: MediaQuery.of(context).size.height *0.34,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                 child: Column(
                   children: [
@@ -840,7 +826,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     },
             child:
             Container(
-              height: MediaQuery.of(context).size.height *0.34,
               decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
               child: Column(
                 children: [
@@ -876,7 +861,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
             },
               child:
               Container(
-                height: MediaQuery.of(context).size.height *0.34,
                 decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                 child: Column(
                   children: [
@@ -943,7 +927,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                   },
                   child:
                   Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -960,7 +943,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                               Row(
                                 children: [
                                   Text(titre_liste_horizontale[0],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
-
                                 ],),
 
 
@@ -982,7 +964,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     },
                     child:
                     Container(
-                      height: MediaQuery.of(context).size.height *0.34,
                       decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                       child: Column(
                         children: [
@@ -1026,7 +1007,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     },
                   child:
                   Container(
-                    height: MediaQuery.of(context).size.height *0.34,
                     decoration: BoxDecoration(border: Border.all(color: Colors.black26),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                     child: Column(
                       children: [
@@ -1062,7 +1042,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
                   },
                     child:
                     Container(
-                      height: MediaQuery.of(context).size.height *0.34,
                       decoration: BoxDecoration(border: Border.all(color: Colors.white),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.03))),
                       child: Column(
                         children: [
@@ -1192,7 +1171,8 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(onPressed: (){
+        IconButton(
+            onPressed: (){
           ZoomDrawer.of(context)!.toggle();
         }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.1,)),
         Row(children: [

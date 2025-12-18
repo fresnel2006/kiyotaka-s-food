@@ -140,16 +140,17 @@ class _ProfilPageState extends State<ProfilPage> {
                   child: Text("MODIFIER COMPTE ",style: TextStyle(color: Colors.white,fontFamily: "Poppins"),),),
                 ),
                   SizedBox(width: MediaQuery.of(context).size.width *0.06,),
-
-                  GestureDetector(child: Container(
+                  GestureDetector(
+                      child: Container(
                     alignment: AlignmentGeometry.center,
                     height: MediaQuery.of(context).size.height *0.05,
                     width: MediaQuery.of(context).size.width *0.4,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.orange),
                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1)),
-                        color: Colors.orange
+                        color: Colors.white
                     ),
-                    child: Text("DECONNEXION",style: TextStyle(color: Colors.white,fontFamily: "Poppins"),),)
+                    child: Text("DECONNEXION",style: TextStyle(color: Colors.orange,fontFamily: "Poppins"),),)
                   )],)
           ],)
         ],

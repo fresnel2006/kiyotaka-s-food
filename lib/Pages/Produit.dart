@@ -17,7 +17,9 @@ List<String> titre_favoris=[];
 List<String> prix_favoris=[];
 int index_fonction=0;
 
+
 class _ProduitPageState extends State<ProduitPage> {
+  int quantite=0;
   bool coeur=false;
   var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
   var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
@@ -83,48 +85,66 @@ class _ProduitPageState extends State<ProduitPage> {
 
   Future <void> commande()async{
 
-    showModalBottomSheet(backgroundColor:Colors.white,context: context, builder: (context)=>Container(
-        height: MediaQuery.of(context).size.height *0.7,
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width *1,
-            ),
-           SizedBox(height: MediaQuery.of(context).size.height *0.035,),
-            Text("${titre[widget.index]}",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06,color: Colors.green),),
-            Lottie.asset("assets/animations/chef.json",height: MediaQuery.of(context).size.height *0.25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Text("QUANTITE : ",style: TextStyle(fontFamily: "Poppins")),
-                    ),
+    showModalBottomSheet(backgroundColor: Colors.transparent,context: context, builder: (context)=>SingleChildScrollView(child: Stack(children: [
+      Container(
+          width: MediaQuery.of(context).size.width *1,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(MediaQuery.of(context).size.width *1,),topRight: Radius.circular(MediaQuery.of(context).size.width *1,),),),
+          height: MediaQuery.of(context).size.height *0.7,
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height *0.075,),
+              Lottie.asset("assets/animations/chef.json",height: MediaQuery.of(context).size.height *0.25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Text("QUANTITE : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05)),
+                  ),
 
-                Container(
-                  child:    Text("0",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange),)
-                  ,)
-            ],),
-            SizedBox(height: MediaQuery.of(context).size.height *0.01,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Text("PRIX : ",style: TextStyle(fontFamily: "Poppins")),
-                    ),
-                SizedBox(width: MediaQuery.of(context).size.width *0.15,),
-                Container(
-                  height: MediaQuery.of(context).size.height *0.06,
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      border: Border.all(color: Colors.black)
-                  ),),
-                SizedBox(width: MediaQuery.of(context).size.width *0.1,),
-                Container(
-                  child:  Text("1000 FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange),)
-                  ,),
+                  Container(
+                    child:    Text("X ${quantite}",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange,fontSize: MediaQuery.of(context).size.width *0.05),)
+                    ,)
+                ],),
+              SizedBox(height: MediaQuery.of(context).size.height *0.01,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Text("PRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05)),
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width *0.15,),
+                  Container(
+                    height: MediaQuery.of(context).size.height *0.06,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        border: Border.all(color: Colors.black)
+                    ),),
+                  SizedBox(width: MediaQuery.of(context).size.width *0.1,),
+                  Container(
+                    child:  Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange,fontSize: MediaQuery.of(context).size.width *0.05),)
+                    ,),
 
-              ],)
-          ],)));
+                ],),
+              SizedBox(height: MediaQuery.of(context).size.height *0.03,),
+              Container(
+                width: MediaQuery.of(context).size.width *0.55,
+                height: MediaQuery.of(context).size.height *0.06,
+                child: ElevatedButton(onPressed: (){
+
+                }, child: Text("VALIDER",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),),)
+            ],)),
+      Column(children: [
+        Container(width: MediaQuery.of(context).size.width *1,),
+        Container(
+          width: MediaQuery.of(context).size.width *1,
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height *0.07,),
+        Text("${titre[widget.index]}",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06,color: Colors.green),),
+
+      ],)
+    ],)));
   }
   @override
   void initState(){
@@ -190,6 +210,11 @@ class _ProduitPageState extends State<ProduitPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed: (){
+                  if(quantite>0){
+                    setState(() {
+quantite-=1;
+                    });
+                  }
 
                 }, icon: Icon(CupertinoIcons.minus,color: Colors.deepOrangeAccent,)),
                 Container(
@@ -201,9 +226,13 @@ class _ProduitPageState extends State<ProduitPage> {
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))
                   ),
 
-                  child:Text("1",style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.05,color: Colors.white,fontFamily: "Poppins"),),
+                  child:Text("${quantite}",style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.05,color: Colors.white,fontFamily: "Poppins"),),
                     ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.deepOrangeAccent,)
+                IconButton(onPressed: (){
+                  setState(() {
+                    quantite+=1;
+                  });
+                }, icon: Icon(Icons.add,color: Colors.deepOrangeAccent,)
                 )
               ],),
           ),

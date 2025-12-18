@@ -15,7 +15,7 @@ class _ScreenPageState extends State<ScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Colors.white,
       body: ZoomDrawer(
         mainScreenTapClose: true,
          slideWidth:MediaQuery.of(context).size.width *0.65 ,

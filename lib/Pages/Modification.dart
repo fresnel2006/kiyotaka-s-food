@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -282,7 +283,7 @@ body: SingleChildScrollView(
     SizedBox(height: MediaQuery.of(context).size.height *0.04,),
     GestureDetector(
         onTap: ()async{
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>MainscreenPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
         },
         child: Container(height: MediaQuery.of(context).size.height *0.08,
           width: MediaQuery.of(context).size.width *0.5,

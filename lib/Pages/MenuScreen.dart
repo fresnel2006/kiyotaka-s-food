@@ -13,7 +13,7 @@ class _MenuscreenPageState extends State<MenuscreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,37 +26,39 @@ class _MenuscreenPageState extends State<MenuscreenPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
               Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                 width: MediaQuery.of(context).size.width *0.1,),
-                Container(child: Text("VOIR PLUS",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),),
+                Container(child: Text("VOIR PLUS",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrangeAccent),),),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                  decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                   width: MediaQuery.of(context).size.width *0.1,),
               ],),
             SizedBox(height: MediaQuery.of(context).size.height *0.05,),
-            GestureDetector(child: Container(
+            GestureDetector(
+              child: Container(
               height: MediaQuery.of(context).size.height *0.07,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white,width: MediaQuery.of(context).size.width *0.004),
+                  border: Border.all(color: Colors.deepOrangeAccent,width: MediaQuery.of(context).size.width *0.004),
                   borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))
               ),
               child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-Icon(FontAwesomeIcons.burger,color: Colors.white,),
+Icon(FontAwesomeIcons.burger,color: Colors.deepOrangeAccent,),
                 SizedBox(width: MediaQuery.of(context).size.width *0.04,),
-                Text("KIYOTAKA'S FOOD",style: TextStyle(color: Colors.white,fontFamily: "Poppins"),)
+                Text("KIYOTAKA'S FOOD",style: TextStyle(color: Colors.deepOrangeAccent,fontFamily: "Poppins"),)
               ],
             ),),
             ),
             SizedBox(height: MediaQuery.of(context).size.height *0.03,),
 
-            GestureDetector(child: Container(
+            GestureDetector(
+                child: Container(
                 height: MediaQuery.of(context).size.height *0.07,
                 decoration: BoxDecoration(
 
-                    border: Border.all(color: Colors.white,width: MediaQuery.of(context).size.width *0.004),
+                    border: Border.all(color: Colors.deepOrangeAccent,width: MediaQuery.of(context).size.width *0.004),
                     borderRadius: BorderRadius.all(
 
                         Radius.circular(MediaQuery.of(context).size.width *1))
@@ -64,10 +66,11 @@ Icon(FontAwesomeIcons.burger,color: Colors.white,),
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(FontAwesomeIcons.candyCane,color: Colors.white,),
+              Icon(FontAwesomeIcons.candyCane,color: Colors.deepOrangeAccent,),
                 SizedBox(width: MediaQuery.of(context).size.width *0.04,),
-                Text("MARIAM'S FOOD",style: TextStyle(color: Colors.white,fontFamily: "Poppins"),)
-            ],)))
+                Text("MARIAM'S FOOD",style: TextStyle(color: Colors.deepOrangeAccent,fontFamily: "Poppins"),)
+            ],))),
+            Lottie.asset("assets/animations/chef.json")
         ],) ,
 
       ),
