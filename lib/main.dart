@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
-import 'package:kiyotaka_s_food/Pages/Connexion.dart';
 import 'package:kiyotaka_s_food/Pages/Inscription.dart';
-import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
-import 'package:kiyotaka_s_food/Pages/Produit.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Forcer uniquement le portrait normal
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((_) {

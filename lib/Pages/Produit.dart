@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/animation.dart';
@@ -19,7 +21,7 @@ int index_fonction=0;
 
 
 class _ProduitPageState extends State<ProduitPage> {
-  int quantite=0;
+  int quantite=1;
   bool coeur=false;
   var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
   var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
@@ -83,18 +85,18 @@ class _ProduitPageState extends State<ProduitPage> {
     };
   }
 
-  Future <void> commande()async{
+  Future <void> commande() async {
 
     showModalBottomSheet(backgroundColor: Colors.transparent,context: context, builder: (context)=>SingleChildScrollView(child: Stack(children: [
       Container(
           width: MediaQuery.of(context).size.width *1,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(MediaQuery.of(context).size.width *1,),topRight: Radius.circular(MediaQuery.of(context).size.width *1,),),),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(MediaQuery.of(context).size.width *0.04,),topRight: Radius.circular(MediaQuery.of(context).size.width *0.04,),),),
           height: MediaQuery.of(context).size.height *0.7,
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height *0.075,),
+              SizedBox(height: MediaQuery.of(context).size.height *0.06,),
               Lottie.asset("assets/animations/chef.json",height: MediaQuery.of(context).size.height *0.25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +142,7 @@ class _ProduitPageState extends State<ProduitPage> {
         Container(
           width: MediaQuery.of(context).size.width *1,
         ),
-        SizedBox(height: MediaQuery.of(context).size.height *0.07,),
+        SizedBox(height: MediaQuery.of(context).size.height *0.03,),
         Text("${titre[widget.index]}",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06,color: Colors.green),),
 
       ],)
@@ -156,18 +158,19 @@ class _ProduitPageState extends State<ProduitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           Stack(
             children: [
             Container(
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
-              height: MediaQuery.of(context).size.height *0.32,
+              height: MediaQuery.of(context).size.height *0.355,
               width: MediaQuery.of(context).size.width *1,
               child: Image.asset(images[widget.index],fit: BoxFit.cover,),),
                 Container(
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
-                  height: MediaQuery.of(context).size.height *0.32,
+                  height: MediaQuery.of(context).size.height *0.355,
                   width: MediaQuery.of(context).size.width *1,
                   decoration: BoxDecoration(color: Colors.black38,),
             )
@@ -210,7 +213,7 @@ class _ProduitPageState extends State<ProduitPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed: (){
-                  if(quantite>0){
+                  if(quantite>1){
                     setState(() {
 quantite-=1;
                     });
@@ -226,7 +229,7 @@ quantite-=1;
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))
                   ),
 
-                  child:Text("${quantite}",style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.05,color: Colors.white,fontFamily: "Poppins"),),
+                  child:Text("${quantite}",style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.04,color: Colors.white,fontFamily: "Poppins"),),
                     ),
                 IconButton(onPressed: (){
                   setState(() {
@@ -249,7 +252,7 @@ color: Colors.deepOrangeAccent
             ),
 
             child: IconButton(onPressed: (){
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
             }, icon: Icon(CupertinoIcons.arrow_left,color: Colors.deepOrangeAccent,)),),
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.04,left: MediaQuery.of(context).size.width *0.9),
@@ -285,73 +288,71 @@ else{
               child: Icon(CupertinoIcons.heart_fill,color: Colors.deepOrangeAccent,).animate().scale(begin: Offset(0, 0),end: Offset(3, 3),duration: Duration(seconds: 1)).fadeOut(duration: Duration(seconds: 1)) ,),
           ),Container(
            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.36),
-            child: Column(
+            child: SingleChildScrollView(child: Column(
             children: [
 Container(
   margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.01),
-  width:MediaQuery.of(context).size.width *0.7,
+  width:MediaQuery.of(context).size.width *0.9,
 
   child: Text(titre[widget.index],style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ),),
 ),
               Container(
                 margin:EdgeInsets.only(left: MediaQuery.of(context).size.height *0.017),
-                width: MediaQuery.of(context).size.height *0.32,
+                width:MediaQuery.of(context).size.width *0.9,
 
                 child: Row(
                   children: [
                   Text("PRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 )),
                   Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.06 ,color: Colors.deepOrangeAccent))
                 ],),),
+              Container(
+               width: MediaQuery.of(context).size.width *0.7,
+                height: MediaQuery.of(context).size.height *0.1,
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+
+                        height: MediaQuery.of(context).size.height *0.06,
+                        width: MediaQuery.of(context).size.width *0.3,
+                        decoration: BoxDecoration(color: Colors.black12,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))),
+
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(CupertinoIcons.car),
+                            SizedBox(width: MediaQuery.of(context).size.width *0.02,),
+                            Text("GRATUITE",style: TextStyle(fontFamily: "Poppins"))
+                          ],))
+                    ,Container(
+                        height: MediaQuery.of(context).size.height *0.06,
+                        width: MediaQuery.of(context).size.width *0.3,
+                        decoration: BoxDecoration(color: Colors.black12,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.timer),
+                            SizedBox(width: MediaQuery.of(context).size.width *0.02,),
+                            Text("MATIN",style: TextStyle(fontFamily: "Poppins"))
+                          ],))
+
+                  ],),),
+              Container(
+alignment: AlignmentGeometry.center,
+                width: MediaQuery.of(context).size.width *1,
+                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width *0.03,right: MediaQuery.of(context).size.width *0.03),
+                child:
+                widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
+                widget.index==3||widget.index==5||widget.index==6||widget.index==7||widget.index==8||widget.index==9?Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035),):
+                widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
+                widget.index==4?Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.03)):Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035))
 
 
-              
-          ],),),
-          Container(
-margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: MediaQuery.of(context).size.width *0.15),
-            width: MediaQuery.of(context).size.width *0.7,
-            height: MediaQuery.of(context).size.height *0.1,
 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
+              )],),),
+          ),
 
-                    height: MediaQuery.of(context).size.height *0.06,
-                    width: MediaQuery.of(context).size.width *0.3,
-                    decoration: BoxDecoration(color: Colors.black12,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))),
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(CupertinoIcons.car),
-                        SizedBox(width: MediaQuery.of(context).size.width *0.02,),
-                        Text("GRATUITE",style: TextStyle(fontFamily: "Poppins"))
-                      ],))
-                ,Container(
-                    height: MediaQuery.of(context).size.height *0.06,
-                    width: MediaQuery.of(context).size.width *0.3,
-                    decoration: BoxDecoration(color: Colors.black12,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.02))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.timer),
-                        SizedBox(width: MediaQuery.of(context).size.width *0.02,),
-                        Text("MATIN",style: TextStyle(fontFamily: "Poppins"))
-                      ],))
-
-              ],),),
-          Container(
-
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.55,left: MediaQuery.of(context).size.width *0.05),
-            width: MediaQuery.of(context).size.width *0.9,
-
-
-            child:
-            widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):
-            widget.index==3||widget.index==5||widget.index==6||widget.index==7?Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.05),):
-            widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):
-            widget.index==1||widget.index==8?Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045)):Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.045))
-            ,),
           Container(
           decoration: BoxDecoration(
               color: Colors.deepOrangeAccent,
@@ -360,7 +361,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.44,left: Medi
 
             height:MediaQuery.of(context).size.height *0.08 ,
             width: MediaQuery.of(context).size.width *0.5,
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.75,left: MediaQuery.of(context).size.width *0.05),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.8,left: MediaQuery.of(context).size.width *0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

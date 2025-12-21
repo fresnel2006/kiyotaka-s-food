@@ -260,7 +260,7 @@ body: SingleChildScrollView(
       ),
 
     ),
-    SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+    SizedBox(height: MediaQuery.of(context).size.height *0.04,),
     //espace
     // les deux traits et le mot "assistance"
     Container(child: ElevatedButton(onPressed: (){
@@ -282,7 +282,7 @@ body: SingleChildScrollView(
       ],),
     SizedBox(height: MediaQuery.of(context).size.height *0.04,),
     GestureDetector(
-        onTap: ()async{
+        onTap: () async{
           Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
         },
         child: Container(height: MediaQuery.of(context).size.height *0.08,

@@ -37,7 +37,7 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
                       children: [
                       Container(
 
-                        child: index==0?Icon(Icons.home_filled,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1,):Icon(Icons.home_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1,),)
+                        child: index==0?Icon(Icons.home_filled,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058,):Icon(Icons.home_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058,),)
                       ,index==0?Text("ACCEUIL",style: TextStyle(color: Colors.orange,fontFamily: "Poppins"),):Container()],)
                 ,)
               ,GestureDetector(
@@ -48,7 +48,7 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
                  child: Column(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
-                   index==1?Icon(Icons.shopping_basket_sharp,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1):Icon(Icons.shopping_basket_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1),
+                   index==1?Icon(Icons.shopping_basket_sharp,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058):Icon(Icons.shopping_basket_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058),
                    index==1?Text("PANIER",style: TextStyle(fontFamily: "Poppins",color: Colors.orange),):Container()
                  ],),),)
               ,GestureDetector(
@@ -59,7 +59,7 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      index==2?Icon(CupertinoIcons.suit_heart_fill,color:Colors.orange,size: MediaQuery.of(context).size.width *0.1):Icon(CupertinoIcons.suit_heart,color:Colors.orange,size: MediaQuery.of(context).size.width *0.1),
+                      index==2?Icon(CupertinoIcons.suit_heart_fill,color:Colors.orange,size: MediaQuery.of(context).size.width *0.058):Icon(CupertinoIcons.suit_heart,color:Colors.orange,size: MediaQuery.of(context).size.width *0.058),
                       index==2?Text("FAVORIS",style: TextStyle(fontFamily: "Poppins",color: Colors.orange)):Container()
                   ],),),)
               ,GestureDetector(
@@ -70,12 +70,12 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  index==3?Icon(Icons.manage_accounts_rounded,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1):Icon(Icons.manage_accounts_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.1),
+                  index==3?Icon(Icons.manage_accounts_rounded,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058):Icon(Icons.manage_accounts_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.058),
                   index==3?Text("COMPTE",style: TextStyle(fontFamily: "Poppins",color: Colors.orange),):Container()
                 ],),) ,)
 
             ],) ,),
-          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(1000),)),
+
           margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.02),
         ),
       )

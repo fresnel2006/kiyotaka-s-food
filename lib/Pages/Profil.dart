@@ -15,7 +15,8 @@ class _ProfilPageState extends State<ProfilPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(child: Stack(
+      body: SingleChildScrollView(
+        child: Stack(
         children: [
           Container(
             width: MediaQuery.of(context).size.width *1,

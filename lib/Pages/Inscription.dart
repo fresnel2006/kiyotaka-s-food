@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kiyotaka_s_food/Pages/Connexion.dart';
+import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -140,11 +141,14 @@ void affichermotdepasse(){
       afficher_mot_de_passe=!afficher_mot_de_passe;
     });
 }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+
         child: Stack(
           children: [
         Column(

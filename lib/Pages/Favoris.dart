@@ -50,7 +50,7 @@ class _FavorisPageState extends State<FavorisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body:Stack(
+      body: SingleChildScrollView(child: Stack(
         children: [
         Column(
           children: [
@@ -102,23 +102,24 @@ class _FavorisPageState extends State<FavorisPage> {
     child: Container(
     margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.012,left: MediaQuery.of(context).size.width *0.02),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
     children: [
-    Container(height: MediaQuery.of(context).size.height *0.12,
-    decoration: BoxDecoration(),
-    width: MediaQuery.of(context).size.width *0.35,
-    child: ClipRRect(
+    Container(
+      height:MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.height *0.165,
+      child: ClipRRect(
     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
     child: Image.asset(image_favoris[index],fit: BoxFit.cover,),),
     ),
     SizedBox(width: MediaQuery.of(context).size.width *0.06,),
-    Stack(
+    Column(
     children: [
-    Text("${titre_favoris[index]}\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
     Container(
-    height: MediaQuery.of(context).size.height *0.04,
-    width: MediaQuery.of(context).size.width *0.5,
-    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.05),
-    decoration: BoxDecoration(
+      width: MediaQuery.of(context).size.width *0.5,
+      child: Text("${titre_favoris[index]}\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
+    ),Container(
+      width: MediaQuery.of(context).size.width *0.5,
+      decoration: BoxDecoration(
     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1))
     ),
 
@@ -126,7 +127,7 @@ class _FavorisPageState extends State<FavorisPage> {
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-    Text("${prix_favoris[index]} FCFA",style:TextStyle(fontFamily: "Poppins",color: Colors.orange) ,),
+    Text("${prix_favoris[index]} FCFA",style:TextStyle(fontFamily: "Poppins",color: Colors.orange,fontSize: MediaQuery.of(context).size.width *0.04) ,),
     IconButton(onPressed: ()async{
       image_favoris.removeAt(index);
       titre_favoris.removeAt(index);
@@ -137,7 +138,7 @@ class _FavorisPageState extends State<FavorisPage> {
       print("not liked");
       await sauvegarder_produit_favoris();
       await charger_produit_favoris();
-    }, icon: Icon(CupertinoIcons.heart_slash,color: Colors.orange,))
+    }, icon: Icon(CupertinoIcons.heart_slash,color: Colors.orange,size:MediaQuery.of(context).size.width *0.04))
 
     ],),),
 
@@ -146,7 +147,7 @@ class _FavorisPageState extends State<FavorisPage> {
 
     )
 
-    ],),),),):Column(
+    ],),),),):SingleChildScrollView(child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height *0.1),
                   Container(
@@ -163,10 +164,10 @@ class _FavorisPageState extends State<FavorisPage> {
 
               )
 
-
+              )
             ],)
       ],)
-      ,
-    );
+
+      ));
   }
 }

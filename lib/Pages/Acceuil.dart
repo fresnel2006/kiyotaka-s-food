@@ -86,14 +86,15 @@ body: Stack(
       //widget de l'image de kiyotaka's food
             valeur_redictrice_widget==2?Container(
               alignment: AlignmentGeometry.center,
-              width: MediaQuery.of(context).size.width *1,
+              height: MediaQuery.of(context).size.height *0.23,
+              width: MediaQuery.of(context).size.width *0.55,
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
-              child:  Image.asset("assets/images/mariame food.png",fit: BoxFit.cover,height: MediaQuery.of(context).size.height *0.18,width:MediaQuery.of(context).size.width *0.45
+              child:  Image.asset("assets/images/mariame food.png",fit: BoxFit.cover
 
               ),):Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
-        height: MediaQuery.of(context).size.height *0.18,
-        width: MediaQuery.of(context).size.width *0.85,
+        height: MediaQuery.of(context).size.height *0.23,
+        width: MediaQuery.of(context).size.width *0.55,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1
@@ -203,7 +204,6 @@ onTap: (){
                   ],),
 SizedBox(height: MediaQuery.of(context).size.height *0.03,),
 valeur_redictrice_widget==1?
-    
             Container(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -270,11 +270,7 @@ valeur_redictrice_widget==1?
                               SizedBox(height: MediaQuery.of(context).size.height *0.012,),
                               Row(children: [
                                 Text(titre_liste_horizontale[1],style: TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
-
                               ],),
-
-
-
                                 Text(prix_liste_horizontale[1],style: TextStyle(color: Colors.orange,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04)),
                               SizedBox(width: MediaQuery.of(context).size.width *0.075,height: MediaQuery.of(context).size.height *0.01,),
                               Icon(Icons.shopping_cart)
@@ -411,7 +407,7 @@ valeur_redictrice_widget==1?
                 decoration: BoxDecoration(border: Border.all(color: Colors.orange)),)
             ],):Text(""),
             valeur_redictrice_widget==1?Container(
-              height: MediaQuery.of(context).size.height *1,
+              height:MediaQuery.of(context).size.height *1.2,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 7,itemBuilder: (context, index) => GestureDetector(
@@ -423,34 +419,32 @@ valeur_redictrice_widget==1?
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ProduitPage(index: index)));
                 },
                 child: Container(
+
                 margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.012,left: MediaQuery.of(context).size.width *0.02),
                 child: Row(
+mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Container(height: MediaQuery.of(context).size.height *0.12,
-                    decoration: BoxDecoration(),
-                    width: MediaQuery.of(context).size.width *0.35,
+                  Container(
+                    height:MediaQuery.of(context).size.height *0.1,
+                    width: MediaQuery.of(context).size.height *0.165,
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
                     child: Image.asset(images_liste_verticale[index],fit: BoxFit.cover,),),
                   ),
                     SizedBox(width: MediaQuery.of(context).size.width *0.06,),
-                    Stack(
+                    Column(
                       children: [
-                      Text("${titre_liste_verticale[index]}\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
-Container(
-  height: MediaQuery.of(context).size.height *0.04,
-  width: MediaQuery.of(context).size.width *0.5,
-margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.05),
-  decoration: BoxDecoration(
-  borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1))
-  ),
-
+                      Container(
+                      width: MediaQuery.of(context).size.width *0.5,
+                        child: Text("${titre_liste_verticale[index]}\nPRIX : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.035),),
+                      ),Container(
+width: MediaQuery.of(context).size.width *0.5,
 
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-    Text(prix_liste_vertical[index],style:TextStyle(fontFamily: "Poppins",color: Colors.orange) ,),
-      Icon(Icons.shopping_cart_checkout_rounded)
+    Text(prix_liste_vertical[index],style:TextStyle(fontFamily: "Poppins",color: Colors.orange,fontSize: MediaQuery.of(context).size.width *0.03) ,),
+      Icon(Icons.shopping_cart_checkout_rounded,size: MediaQuery.of(context).size.width *0.045,color:Colors.black)
     ],),),
 
 
@@ -469,7 +463,7 @@ margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.05),
 
 
 valeur_redictrice_widget==2?Container(
-    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.484),
     height: MediaQuery.of(context).size.height *0.8,
 
     child: SingleChildScrollView(
@@ -729,7 +723,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
 
     valeur_redictrice_widget==3?Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.484),
       child: SingleChildScrollView(
   child: Column(
     children: [
@@ -911,7 +905,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
 
     valeur_redictrice_widget==4?Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.435),
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.484),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -1174,12 +1168,15 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
         IconButton(
             onPressed: (){
           ZoomDrawer.of(context)!.toggle();
-        }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.1,)),
+        }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.07,color:Colors.black)),
         Row(children: [
           Icon(Icons.local_restaurant ,size:MediaQuery.of(context).size.width *0.09),
           Text("kiyotaka's food",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05),),
         ],),
-      IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.magnifyingGlass,size:MediaQuery.of(context).size.width *0.07,))
+
+      IconButton(onPressed: (){
+
+      }, icon: Icon(FontAwesomeIcons.magnifyingGlass,size:MediaQuery.of(context).size.width *0.07,color: Colors.black,))
     ],),
 
 
