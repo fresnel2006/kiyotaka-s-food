@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/Connexion.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -134,6 +138,9 @@ class _InscriptionPageState extends State<InscriptionPage> {
           couleur_bordure_champs_confirmation=true;
         });
       }
+      if(nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty&&numero.text.length==10&&confirmation_mot_de_passe.text.isNotEmpty&&confirmation_mot_de_passe.text==mot_de_passe.text&&mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")){
+        await verifier_utilisateur();
+      }
     }
     //fonction pour afficher le mot de passe
 void affichermotdepasse(){
@@ -142,6 +149,51 @@ void affichermotdepasse(){
     });
 }
 
+  void message_sur_utilisateur(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.orange),
+      child: ListTile(title: Text("COMPTE EXISTANT",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIEZ LE NUMERO",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.dangerous_outlined,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+
+    )));
+  }
+Future <void> enregistrer_utilisateur()async {
+  final url = Uri.parse("http://10.0.2.2:8000/ajouter_utilisateur");
+  var message = await http.post(url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "nom": nom_complet.text,
+        "numero": numero.text,
+        "mot_de_passe": mot_de_passe.text
+      })
+  );
+  var data=jsonDecode(message.body);
+if(data["statut"]=="ajouter"){
+  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+}
+  print(data.toString());
+}
+    Future <void> verifier_utilisateur()async{
+      final url=Uri.parse("http://10.0.2.2:8000/verifier_utilisateur");
+      var message=await http.post(url,
+          headers: {"Content-Type":"application/json"},
+          body: jsonEncode({
+            "numero":numero.text
+          })
+      );
+    var data=jsonDecode(message.body);
+      if(data["resultat"]!="existe pas"){
+        message_sur_utilisateur();
+        print("numero existe deja");
+      }else if(data["resultat"]=="existe pas"){
+        await enregistrer_utilisateur();
+      }
+    print(data.toString());
+}
   @override
   Widget build(BuildContext context) {
 

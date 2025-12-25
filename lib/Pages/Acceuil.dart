@@ -75,7 +75,7 @@ body: Stack(
         child: Column(
           children: [
             //espace du haut
-            SizedBox(height: MediaQuery.of(context).size.height *0.035,),
+            SizedBox(height: MediaQuery.of(context).size.height *0.01,),
             //espace du haut
 
             //widget permettant de centrer
@@ -86,15 +86,15 @@ body: Stack(
       //widget de l'image de kiyotaka's food
             valeur_redictrice_widget==2?Container(
               alignment: AlignmentGeometry.center,
-              height: MediaQuery.of(context).size.height *0.23,
+              height: MediaQuery.of(context).size.height *0.25,
               width: MediaQuery.of(context).size.width *0.55,
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
               child:  Image.asset("assets/images/mariame food.png",fit: BoxFit.cover
 
               ),):Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.12),
-        height: MediaQuery.of(context).size.height *0.23,
-        width: MediaQuery.of(context).size.width *0.55,
+        height: MediaQuery.of(context).size.height *0.25,
+        width: MediaQuery.of(context).size.width *0.6,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1

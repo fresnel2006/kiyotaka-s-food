@@ -164,12 +164,10 @@ class _ProduitPageState extends State<ProduitPage> {
           Stack(
             children: [
             Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
-              height: MediaQuery.of(context).size.height *0.355,
+             height: MediaQuery.of(context).size.height *0.355,
               width: MediaQuery.of(context).size.width *1,
               child: Image.asset(images[widget.index],fit: BoxFit.cover,),),
                 Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.03),
                   height: MediaQuery.of(context).size.height *0.355,
                   width: MediaQuery.of(context).size.width *1,
                   decoration: BoxDecoration(color: Colors.black38,),
