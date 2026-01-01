@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
@@ -29,15 +32,7 @@ class _ModificationPageState extends State<ModificationPage> {
   //booleen permettant de faire afficher le mot de passe
   bool afficher_mot_de_passe=true;
 
-  //fonction permettant de nous diriger vers le whatsapp de kyiyotaka's food
-  Future <void> lancer_whatsapp ()async{
-    try {
-      final url = Uri.parse("https://wa.me/2250789734299");
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    }catch(e){
-      print("Erreur sur le lien vers le compte whatsapp sur la page d'inscription");
-    }
-  }
+
   //fonctions permettant de faire afficher un message d'erreur
   void message_champ_vide(){
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
@@ -77,8 +72,8 @@ class _ModificationPageState extends State<ModificationPage> {
   }
   //fonction de verification des valeurs des champs de saisie
   void verification()async{
-    if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty||numero.text.isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty||numero.text.length!=10){
-      if(nom_complet.text.isEmpty|| nom_complet.text.trim().isEmpty||mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text.isEmpty){
+    if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty||numero.text.isEmpty||mot_de_passe.text.isEmpty||numero.text.length!=10){
+      if(nom_complet.text.isEmpty|| nom_complet.text.trim().isEmpty||mot_de_passe.text.isEmpty){
         message_champ_vide();
       }
       else if(numero.text.length!=10){
@@ -107,11 +102,7 @@ class _ModificationPageState extends State<ModificationPage> {
     if(mot_de_passe.text.contains(" ")){
       message_champs_espace();
     }
-    if(confirmation_mot_de_passe.text.isEmpty||confirmation_mot_de_passe.text!=mot_de_passe.text||confirmation_mot_de_passe.text.contains(" ")){
-      setState(() {
-        couleur_bordure_champs_confirmation=false;
-      });
-    }
+
     if(nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty){
       setState(() {
         couleur_bordure_nom=true;
@@ -127,17 +118,74 @@ class _ModificationPageState extends State<ModificationPage> {
         couleur_bordure_mot_de_passe=true;
       });
     }
-    if(confirmation_mot_de_passe.text.isNotEmpty&&confirmation_mot_de_passe.text==mot_de_passe.text){
-      setState(() {
-        couleur_bordure_champs_confirmation=true;
-      });
+    if(mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")&&numero.text.length==10&&nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty){
+deuxieme_saisie_mot_de_passe();
     }
   }
-  //fonction pour afficher le mot de passe
-  void affichermotdepasse(){
-    setState(() {
-      afficher_mot_de_passe=!afficher_mot_de_passe;
-    });
+
+  void deuxieme_saisie_mot_de_passe(){
+    showModalBottomSheet(backgroundColor: Colors.transparent,context: context, builder: (context)=>SingleChildScrollView(
+        child: Container(
+      height: MediaQuery.of(context).size.height *0.35,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topRight: Radius.circular(MediaQuery.of(context).size.width *0.1),topLeft: Radius.circular(MediaQuery.of(context).size.width *0.1))
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height *0.03,),
+          Text("Saisissez encore le mot de passe ",style: TextStyle(color:Color(0xFF8B3E3B),fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
+          SizedBox(height: MediaQuery.of(context).size.height *0.03,),
+          Container(
+            width: MediaQuery.of(context).size.width *0.8,
+            child: TextFormField(
+
+            controller: confirmation_mot_de_passe,
+            cursorColor: Color(0xFF8B3E3B),
+            style: TextStyle(fontFamily: "Poppins",color:Color(0xFF8B3E3B) ),
+
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red),
+                label: Text("CONFIRMER LE CODE",style: TextStyle(fontFamily: "Poppins",),),
+
+                labelStyle: TextStyle(color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),
+                    borderSide: BorderSide(color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red)
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),
+                    borderSide: BorderSide(color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red)
+                )
+            ),
+          ),),
+          SizedBox(height: MediaQuery.of(context).size.height *0.03,),
+
+          Container(child: ElevatedButton(onPressed: (){
+            if(mot_de_passe.text==confirmation_mot_de_passe.text){
+
+            }
+
+          }, child: Text("S'INSCRIRE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.04),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
+        ],
+      ),)
+    ));
+  }
+  Future<void>modifier_compte() async{
+    final url = Uri.parse("http://10.0.2.2:8000/");
+    var message = await http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "nom": nom_complet.text,
+          "numero": numero.text,
+          "mot_de_passe": mot_de_passe.text
+        })
+    );
+    var data=jsonDecode(message.body);
+    if(data["resultat"]=="modifier"){
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+    }
   }
   @override
   Widget build(BuildContext context) {

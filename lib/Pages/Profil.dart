@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kiyotaka_s_food/Pages/Inscription.dart';
 import 'package:kiyotaka_s_food/Pages/Modification.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key});
@@ -10,7 +13,36 @@ class ProfilPage extends StatefulWidget {
   State<ProfilPage> createState() => _ProfilPageState();
 }
 class _ProfilPageState extends State<ProfilPage> {
+  var nom;
+  var numero;
+List<String>titre_favoris=[];
+  void charger_donnee() async{
+    final prefs=await SharedPreferences.getInstance();
+    setState(() {
+      nom=prefs.getString("nom_utilisateur");
+      numero=prefs.getString("numero_utilisateur");
+    });
+print(nom);
+print(numero);
+  }
+  Future <void> charger_produit_favoris()async{
+    try {
+      final perfs = await SharedPreferences.getInstance();
+      setState(() {
+        titre_favoris= perfs.getStringList("titre_favoris")??[];
+      });
+      print(titre_favoris);
 
+    }catch(e){
+      print(e);
+    }
+  }
+  @override
+  void initState(){
+    super.initState();
+    charger_produit_favoris();
+    charger_donnee();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +95,12 @@ class _ProfilPageState extends State<ProfilPage> {
                 children: [
   Text("NOM : ",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
                 SizedBox(height: MediaQuery.of(context).size.height *0.02,),
-
                 Container(
                   child: TextFormField(
                     readOnly: true,
                     decoration: InputDecoration(
                       prefixIcon: Icon(CupertinoIcons.pen,color: Colors.orange,),
-                      hintText: "TRAORE ANGE FRESNEL",
+                      hintText: "$nom",
                       hintStyle: TextStyle(fontFamily: "Poppins"),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1))
@@ -93,7 +124,7 @@ class _ProfilPageState extends State<ProfilPage> {
                     readOnly: true,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.numbers,color: Colors.green,),
-                        hintText: "0150161468",
+                        hintText: "$numero",
                         hintStyle: TextStyle(fontFamily: "Poppins"),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1))
@@ -120,7 +151,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   ),
                   Container(
                     width:MediaQuery.of(context).size.width *0.25,
-                    child:Text("NOMBRE DE PRODUIT : 0",style: TextStyle(fontFamily: "Poppins")),)
+                    child:titre_favoris==0?Text("0",style: TextStyle(fontFamily: "Poppins"),):Text("NOMBRE DE PRODUIT : ${titre_favoris.length}",style: TextStyle(fontFamily: "Poppins")),)
               ],),
               SizedBox(height: MediaQuery.of(context).size.height *0.02,),
               Row(

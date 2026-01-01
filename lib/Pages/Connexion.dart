@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
 import 'package:kiyotaka_s_food/Pages/Inscription.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConnexionPage extends StatefulWidget {
   const ConnexionPage({super.key});
@@ -56,7 +62,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
   }
 
   //fonction de verification des valeurs saisies
-  void verification(){
+  void verification() async{
     if(numero.text.isEmpty||mot_de_passe.text.isEmpty||mot_de_passe.text.contains(" ")||numero.text.length!=10){
       if(numero.text.isEmpty||mot_de_passe.text.isEmpty){
         message_champs_vide();
@@ -84,8 +90,52 @@ setState(() {
         couleur_bordure_mot_de_passe=false;
       });
     }
-  }
+    if(numero.text.length==10&&mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")){
+      setState(() {
+        couleur_bordure_numero=true;
+        couleur_bordure_mot_de_passe=true;
+      });
 
+      await reconnecter_utilisateur();
+    }
+  }
+  void message_sur_utilisateur(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.orange),
+      child: ListTile(title: Text("COMPTE NON-EXISTANT",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIEZ LE NUMERO",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.dangerous_outlined,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+
+    )));
+  }
+  Future<void> sauvegarder_information_utilisateur(String nom,String numero) async{
+    final prefs=await SharedPreferences.getInstance();
+    prefs.setString("nom_utilisateur", nom);
+    prefs.setString("numero_utilisateur", numero);
+  }
+Future<void> reconnecter_utilisateur()async{
+    try{
+      final url=Uri.parse("http://10.0.2.2:8000/reconnecter_utilisateur");
+      final message=await http.post(url,headers: {"Content-Type":"application/json"}
+      ,body: jsonEncode({
+            "numero":numero.text,
+            "mot_de_passe":mot_de_passe.text
+          })
+      );
+      var data=jsonDecode(message.body);
+      if(data["resultat"]=="existe pas"){
+message_sur_utilisateur();
+      }else{
+      await sauvegarder_information_utilisateur(data["resultat"][0][0],data["resultat"][0][1]);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+      }
+    }catch(e){
+print("erreur niveau reconnexion de l'utilisateur");
+    }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
