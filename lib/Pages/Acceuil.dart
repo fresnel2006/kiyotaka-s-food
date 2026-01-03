@@ -14,6 +14,8 @@ class AcceuilPage extends StatefulWidget {
 }
 
 class _AcceuilPageState extends State<AcceuilPage> {
+
+
   Future <void> charger_donnee() async{
     final perfs = await SharedPreferences.getInstance();
     setState(() {
@@ -904,7 +906,7 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
 
 
 
-    valeur_redictrice_widget==4?Container(
+    valeur_redictrice_widget==4? Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.484),
       child: SingleChildScrollView(
         child: Column(
@@ -1080,83 +1082,6 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
     ):Text("")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
 //Le menu du haut qui est fixe
   ,Container(
     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.032),
@@ -1174,10 +1099,9 @@ SizedBox(height: MediaQuery.of(context).size.height *0.01,),
           Text("kiyotaka's food",style: TextStyle(fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.05),),
         ],),
 
-      IconButton(onPressed: (){
-
-      }, icon: Icon(FontAwesomeIcons.magnifyingGlass,size:MediaQuery.of(context).size.width *0.07,color: Colors.black,))
-    ],),
+        Container(
+            width:MediaQuery.of(context).size.width *0.117)
+      ],),
 
 
     ),

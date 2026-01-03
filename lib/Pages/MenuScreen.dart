@@ -12,8 +12,13 @@ class MenuscreenPage extends StatefulWidget {
   State<MenuscreenPage> createState() => _MenuscreenPageState();
 }
 Future <void> lancer_whatsapp() async{
-  final url=Uri.parse("");
-  final whatsapp=await launchUrl(url,mode: LaunchMode.externalApplication);
+  try {
+    final url = Uri.parse("https://wa.me/2250789734299");
+    var whatsapp = launchUrl(url,
+        mode: LaunchMode.externalApplication);
+  }catch(e){
+    print("Probleme sur le lien pour aller vers numero whatsapp dans la page d'accueille");
+  }
 }
 class _MenuscreenPageState extends State<MenuscreenPage> {
   @override
@@ -53,13 +58,13 @@ class _MenuscreenPageState extends State<MenuscreenPage> {
               child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-Icon(FontAwesomeIcons.burger,color: Colors.white,),
+                Icon(FontAwesomeIcons.burger,color: Colors.white,),
                 SizedBox(width: MediaQuery.of(context).size.width *0.04,),
                 Text("KIYOTAKA'S FOOD",style: TextStyle(color: Colors.white,fontFamily: "Poppins"),)
               ],
             ),),
             ),
+
             SizedBox(height: MediaQuery.of(context).size.height *0.02,),
 
             GestureDetector(
@@ -85,6 +90,9 @@ Icon(FontAwesomeIcons.burger,color: Colors.white,),
             ],))),
             SizedBox(height: MediaQuery.of(context).size.height *0.02,),
             GestureDetector(
+              onTap: (){
+                lancer_whatsapp();
+              },
                 child: Container(
                     height: MediaQuery.of(context).size.height *0.07,
                     decoration: BoxDecoration(
@@ -97,9 +105,10 @@ Icon(FontAwesomeIcons.burger,color: Colors.white,),
                       children: [
                         Icon(FontAwesomeIcons.whatsapp,color: Colors.white,size:MediaQuery.of(context).size.width *0.07),
                         SizedBox(width: MediaQuery.of(context).size.width *0.04,),
-                        Text("WHATSAPP",style: TextStyle(color: Colors.white,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),)
+                        Text("ASSISTANCE",style: TextStyle(color: Colors.white,fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),)
                       ],))),
-            Lottie.asset("assets/animations/chef.json")
+            Lottie.asset("assets/animations/chef.json",height: MediaQuery.of(context).size.height *0.3,width: MediaQuery.of(context).size.width *1
+            )
         ],) ,
 
       ),

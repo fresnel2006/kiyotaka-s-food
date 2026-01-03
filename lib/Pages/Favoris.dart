@@ -50,7 +50,8 @@ class _FavorisPageState extends State<FavorisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(child: Stack(
+      body: SingleChildScrollView(
+          child: Stack(
         children: [
         Column(
           children: [

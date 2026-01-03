@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MariamPage extends StatefulWidget {
   const MariamPage({super.key});
@@ -9,7 +10,15 @@ class MariamPage extends StatefulWidget {
 }
 
 class _MariamPageState extends State<MariamPage> {
-
+  Future <void> lancer_whatsapp() async{
+    try {
+      final url = Uri.parse("https://wa.me/2250171983360");
+      var whatsapp = launchUrl(url,
+          mode: LaunchMode.externalApplication);
+    }catch(e){
+      print("Probleme sur le lien pour aller vers numero whatsapp dans la page d'accueille");
+    }
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -96,7 +105,7 @@ class _MariamPageState extends State<MariamPage> {
                 SizedBox(height: MediaQuery.of(context).size.height *0.06,),
                 GestureDetector(
                   onTap: (){
-
+lancer_whatsapp();
                   },
                     child: Container(
                         height: MediaQuery.of(context).size.height *0.07,

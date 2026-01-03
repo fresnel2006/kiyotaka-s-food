@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFF632B23),
-        body:RedirecteurPage(),
+        body:ScreenPage(),
       ),
     );
   }

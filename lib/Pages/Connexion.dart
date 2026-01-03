@@ -140,7 +140,8 @@ print("erreur niveau reconnexion de l'utilisateur");
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF632B23),
-      body: Stack(children: [
+      body: SingleChildScrollView(
+        child: Stack(children: [
         Column(
           children: [
           Container(width: MediaQuery.of(context).size.width *1,),
@@ -279,7 +280,7 @@ Navigator.push(context, MaterialPageRoute(builder:(context)=>InscriptionPage()))
 
         ],)
       ],),
-
+      )
     );
   }
 }

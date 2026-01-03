@@ -192,6 +192,7 @@ if(data["statut"]=="ajouter"){
       }else if(data["resultat"]=="existe pas"){
         await enregistrer_utilisateur();
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+        sauvegarder_information_utilisateur();
       }
     print(data.toString());
 }

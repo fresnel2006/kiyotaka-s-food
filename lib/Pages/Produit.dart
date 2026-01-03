@@ -20,13 +20,22 @@ var index;
 List<String> image_favoris=[];
 List<String> titre_favoris=[];
 List<String> prix_favoris=[];
+
+List<String> image_panier=[];
+List<String> titre_panier=[];
+List<String> prix_panier=[];
+List<String> date_panier=[];
+List<String> quantite_panier=[];
+
 int index_fonction=0;
 
 
 class _ProduitPageState extends State<ProduitPage> {
   String numero="vide";
   String nom="vide";
+
   int quantite=1;
+
   bool coeur=false;
   var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
   var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
@@ -141,7 +150,7 @@ class _ProduitPageState extends State<ProduitPage> {
                 child: ElevatedButton(onPressed: (){
               commander_nourriture();
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
-              message_commande_valide();
+
 }, child: Text("VALIDER",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),),)
             ],)),
       Column(children: [
@@ -168,8 +177,31 @@ class _ProduitPageState extends State<ProduitPage> {
 
     var data=jsonDecode(message.body);
     print(data);
-  }
+    if(data["resultat"]=="trop de requette petit hacker"){
+      message_sur_trop_de_commande();
+      return;
+    }else{
+    setState(() {
+      image_panier.add(images[widget.index]);
+      titre_panier.add(titre[widget.index]);
+      prix_panier.add(prix_produit.toString());
+      date_panier.add(DateTime.now().toString());
+      quantite_panier.add(quantite.toString());
+    });
+    message_commande_valide();
+    sauvegarder_commande();
 
+  }}
+  Future<void> sauvegarder_commande() async{
+    final prefs=await SharedPreferences.getInstance();
+    prefs.setStringList("image_panier", image_panier);
+    prefs.setStringList("titre_panier", titre_panier);
+    prefs.setStringList("prix_panier", prix_panier);
+    prefs.setStringList("date_panier", date_panier);
+    prefs.setStringList("quantite_panier", quantite_panier);
+
+
+  }
   Future <void> charger_donnee_utilisateur() async{
     final prefs=await SharedPreferences.getInstance();
     setState(() {
@@ -179,6 +211,19 @@ class _ProduitPageState extends State<ProduitPage> {
     print(nom);
     print(numero);
 
+  }
+
+
+  void message_sur_trop_de_commande(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 3),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.orange),
+      child: ListTile(title: Text("TROP DE COMMANDE PATIENTEZ",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),leading: Icon(Icons.dangerous,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+    )));
   }
   void message_commande_valide(){
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 3),backgroundColor:Colors.transparent,content: Container(
@@ -276,6 +321,7 @@ quantite-=1;
                 IconButton(onPressed: (){
                   setState(() {
                     quantite+=1;
+
                   });
                 }, icon: Icon(Icons.add,color: Colors.deepOrangeAccent,)
                 )

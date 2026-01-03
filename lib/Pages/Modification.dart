@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ModificationPage extends StatefulWidget {
@@ -72,27 +73,15 @@ class _ModificationPageState extends State<ModificationPage> {
   }
   //fonction de verification des valeurs des champs de saisie
   void verification()async{
-    if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty||numero.text.isEmpty||mot_de_passe.text.isEmpty||numero.text.length!=10){
-      if(nom_complet.text.isEmpty|| nom_complet.text.trim().isEmpty||mot_de_passe.text.isEmpty){
-        message_champ_vide();
-      }
-      else if(numero.text.length!=10){
-        setState(() {
-          couleur_bordure_numero=false;
-        });
-        message_numero_chiffre();
-      }
+    if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty||mot_de_passe.text.isEmpty){
+      message_champ_vide();
     }
     if(nom_complet.text.isEmpty||nom_complet.text.trim().isEmpty){
       setState(() {
         couleur_bordure_nom=false;
       });
     }
-    if(numero.text.isEmpty){
-      setState(() {
-        couleur_bordure_numero=false;
-      });
-    }
+
 
     if(mot_de_passe.text.isEmpty||mot_de_passe.text.contains(" ")){
       setState(() {
@@ -108,18 +97,14 @@ class _ModificationPageState extends State<ModificationPage> {
         couleur_bordure_nom=true;
       });
     }
-    if(numero.text.length==10){
-      setState(() {
-        couleur_bordure_numero=true;
-      });
-    }
+
     if(mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")){
       setState(() {
         couleur_bordure_mot_de_passe=true;
       });
     }
-    if(mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")&&numero.text.length==10&&nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty){
-deuxieme_saisie_mot_de_passe();
+    if(mot_de_passe.text.isNotEmpty&&!mot_de_passe.text.contains(" ")&&nom_complet.text.isNotEmpty&&nom_complet.text.trim().isNotEmpty){
+        deuxieme_saisie_mot_de_passe();
     }
   }
 
@@ -134,7 +119,7 @@ deuxieme_saisie_mot_de_passe();
       ),
       child: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height *0.03,),
+          SizedBox(height: MediaQuery.of(context).size.height *0.04,),
           Text("Saisissez encore le mot de passe ",style: TextStyle(color:Color(0xFF8B3E3B),fontFamily: "Poppins",fontSize: MediaQuery.of(context).size.width *0.04),),
           SizedBox(height: MediaQuery.of(context).size.height *0.03,),
           Container(
@@ -147,7 +132,7 @@ deuxieme_saisie_mot_de_passe();
 
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red),
-                label: Text("CONFIRMER LE CODE",style: TextStyle(fontFamily: "Poppins",),),
+                label: Text("CONFIRMER",style: TextStyle(fontFamily: "Poppins",),),
 
                 labelStyle: TextStyle(color: couleur_bordure_champs_confirmation?Color(0xFF8B3E3B):Colors.red),
                 focusedBorder: OutlineInputBorder(
@@ -164,31 +149,80 @@ deuxieme_saisie_mot_de_passe();
 
           Container(child: ElevatedButton(onPressed: (){
             if(mot_de_passe.text==confirmation_mot_de_passe.text){
-
+              modifier_compte();
+            }else{
+                Navigator.pop(context);
+                message_sur_mot_de_passe();
             }
-
-          }, child: Text("S'INSCRIRE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.04),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
+          }, child: Text("VALIDER",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.04),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
         ],
       ),)
     ));
   }
+  void message_sur_mot_de_passe(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.orange),
+      child: ListTile(title: Text("ERREUR SUR MOT DE PASSE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIEZ LE MOT DE PASSE",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.dangerous_outlined,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+    )));
+  }
+  void message_sur_modification(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.green),
+      child: ListTile(title: Text("MODIFICATIONS AJOUTEES",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("MERCI !",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.check_circle,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+    )));
+  }
+
   Future<void>modifier_compte() async{
-    final url = Uri.parse("http://10.0.2.2:8000/");
+    final url = Uri.parse("http://10.0.2.2:8000/modifier_utilisateur");
     var message = await http.post(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "nom": nom_complet.text,
-          "numero": numero.text,
-          "mot_de_passe": mot_de_passe.text
+          "mot_de_passe": mot_de_passe.text,
+          "numero_utilisation":numero_utilisation
         })
     );
+
     var data=jsonDecode(message.body);
-    if(data["resultat"]=="modifier"){
+    if(data["resultat"]=="modifications ajoutées"){
+      sauvegarder_information_utilisateur();
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+      message_sur_modification();
     }
+  }
+
+
+
+  Future<void> sauvegarder_information_utilisateur() async{
+    final prefs=await SharedPreferences.getInstance();
+    prefs.setString("nom_utilisateur", nom_complet.text);
+  }
+  var numero_utilisation;
+  void charger_donnee() async{
+    final prefs=await SharedPreferences.getInstance();
+    setState(() {
+      numero_utilisation=prefs.getString("numero_utilisateur");
+    });
+
+  }
+  @override
+  void initState(){
+    super.initState();
+    charger_donnee();
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
 body: SingleChildScrollView(
@@ -241,43 +275,8 @@ body: SingleChildScrollView(
     SizedBox(height: MediaQuery.of(context).size.height *0.02,),
     //espace
     //contenaire de saisie du numero
-    Container(
-
-      decoration: BoxDecoration(
 
 
-      ),
-      width: MediaQuery.of(context).size.width *0.8,
-      height: MediaQuery.of(context).size.height *0.065,
-      child: TextFormField(
-        controller: numero,
-        cursorColor: Color(0xFF8B3E3B),
-
-        style: TextStyle(fontFamily: "Poppins",color:Color(0xFF8B3E3B) ),
-
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly
-        ],
-        decoration: InputDecoration(
-            prefixIcon: Icon(Icons.tag,size: MediaQuery.of(context).size.width *0.05,color: couleur_bordure_numero?Color(0xFF8B3E3B):Colors.red,),
-            hint: Text("NUMERO ",style: TextStyle(fontFamily: "Poppins",color: couleur_bordure_numero?Color(0xFF8B3E3B):Colors.red),),
-
-
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),
-                borderSide: BorderSide(color: couleur_bordure_numero?Color(0xFF8B3E3B):Colors.red)
-            ),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),
-                borderSide: BorderSide(color: couleur_bordure_numero?Color(0xFF8B3E3B):Colors.red)
-            )
-        ),
-      ),
-
-    ),
-    //espace
-    SizedBox(height: MediaQuery.of(context).size.height *0.02,),
-    //espace
     //contenaire de saisie du mot de passe
     Container(
 
@@ -294,7 +293,7 @@ body: SingleChildScrollView(
 
         decoration: InputDecoration(
             prefixIcon: Icon(Icons.lock,size: MediaQuery.of(context).size.width *0.05,color: couleur_bordure_mot_de_passe?Color(0xFF8B3E3B):Colors.red),
-            hint: Text("MOT DE PASSE ",style: TextStyle(fontFamily: "Poppins",color: couleur_bordure_mot_de_passe?Color(0xFF8B3E3B):Colors.red),),
+            hint: Text("NOUVEAU MOT DE PASSE ",style: TextStyle(fontFamily: "Poppins",color: couleur_bordure_mot_de_passe?Color(0xFF8B3E3B):Colors.red),),
 
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.1)),

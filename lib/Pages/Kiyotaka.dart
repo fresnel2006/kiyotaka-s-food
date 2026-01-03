@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class KiyotakaPage extends StatefulWidget {
   const KiyotakaPage({super.key});
@@ -8,7 +9,18 @@ class KiyotakaPage extends StatefulWidget {
   State<KiyotakaPage> createState() => _KiyotakaPageState();
 }
 
+Future <void> lancer_whatsapp() async{
+  try {
+    final url = Uri.parse("https://wa.me/2250789734299");
+    var whatsapp = launchUrl(url,
+        mode: LaunchMode.externalApplication);
+  }catch(e){
+    print("Probleme sur le lien pour aller vers numero whatsapp dans la page d'accueille");
+  }
+}
+
 class _KiyotakaPageState extends State<KiyotakaPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +106,7 @@ class _KiyotakaPageState extends State<KiyotakaPage> {
                 SizedBox(height: MediaQuery.of(context).size.height *0.06,),
                 GestureDetector(
                     onTap: (){
-
+lancer_whatsapp();
                     },
                     child: Container(
                         height: MediaQuery.of(context).size.height *0.07,
