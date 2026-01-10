@@ -92,6 +92,8 @@ flutter:
      - assets/animations/chef.json
      - assets/images/mariam.png
      - assets/images/elysee.jpg
+     - assets/images/gateau.jpg
+     - assets/images/attieke.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

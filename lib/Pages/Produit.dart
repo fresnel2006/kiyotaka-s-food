@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:http/http.dart' as http;
-import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +19,6 @@ var index;
 List<String> image_favoris=[];
 List<String> titre_favoris=[];
 List<String> prix_favoris=[];
-
 List<String> image_panier=[];
 List<String> titre_panier=[];
 List<String> prix_panier=[];
@@ -37,9 +35,9 @@ class _ProduitPageState extends State<ProduitPage> {
   int quantite=1;
 
   bool coeur=false;
-  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg"];
-  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET"];
-  var prix=[1000,500,1000,2000-1000,200,2000-1000,2000-1000,3500,1000,4000,500,500,500,1000];
+  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg",""];
+  var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET","BOUTEILLE DE GARI"];
+  var prix=[1000,500,1000,2000,200,2000-1000,2000-1000,3500,1000,4000,500,500,500,1000,500,500];
 
   var prix_produit;
   void reduction_augmentation_prix(){
@@ -48,6 +46,12 @@ class _ProduitPageState extends State<ProduitPage> {
         prix_produit=1000;
       });
     }
+    else if(widget.index==5||widget.index==6){
+      setState(() {
+        prix_produit=2000;
+      });
+    }
+
     else if (widget.index==1||widget.index==11||widget.index==10||widget.index==12){
       setState(() {
         prix_produit=500;
@@ -66,6 +70,11 @@ class _ProduitPageState extends State<ProduitPage> {
     else if (widget.index==9){
       setState(() {
         prix_produit=4000;
+      });
+    }
+    else if (widget.index==14){
+      setState(() {
+        prix_produit=500;
       });
     }
     else{
@@ -89,7 +98,6 @@ class _ProduitPageState extends State<ProduitPage> {
       titre_favoris=perfs.getStringList("titre_favoris")??[];
       prix_favoris=perfs.getStringList("prix_favoris")??[];
     });
-
   }
   Future <void> ajouter_coeur()async{
     if(image_favoris.contains(images[widget.index])){
@@ -434,7 +442,9 @@ alignment: AlignmentGeometry.center,
                 widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
                 widget.index==3||widget.index==5||widget.index==6||widget.index==7||widget.index==8||widget.index==9?Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035),):
                 widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
-                widget.index==4?Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.03)):Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035))
+                widget.index==4?Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.03)):
+                widget.index==11?Text("Gari de très bonne qualité, bien sec, propre et naturellement savoureux. Préparé avec soin à partir de manioc sélectionné, il est croquant et agréable à consommer tel quel ou pour accompagner vos plats. Idéal pour une consommation quotidienne.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
+                Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035))
 
 
 
@@ -454,7 +464,7 @@ alignment: AlignmentGeometry.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
             IconButton(onPressed: (){
-              if(widget.index==3||widget.index==5||widget.index==7||widget.index==6){
+              if(widget.index==3||widget.index==7){
                 if(prix_produit==2000){
                   setState(() {
                     prix_produit-=1000;
@@ -471,13 +481,7 @@ alignment: AlignmentGeometry.center,
             }, icon: Icon(CupertinoIcons.minus,color: Colors.white,)),
               Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.white),),
               IconButton(onPressed: (){
-        if(widget.index==3||widget.index==5||widget.index==7||widget.index==6){
-          if(prix_produit==1000){
-            setState(() {
-              prix_produit+=1000;
-            });
-          }
-        }
+
         if(widget.index==8){
           if(prix_produit==1000){
             setState(() {
