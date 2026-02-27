@@ -41,17 +41,7 @@ var Pages=[AcceuilPage(),PanierPage(),FavorisPage(),ProfilPage()];
                         child: index==0?Icon(Icons.home_filled,color: Colors.orange,size: MediaQuery.of(context).size.width *0.06,):Icon(Icons.home_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.06,),)
                       ,index==0?Text("ACCEUIL",style: TextStyle(color: Colors.orange,fontFamily: "Poppins"),):Container()],)
                 ,)
-              ,GestureDetector(
-                onTap: (){setState(() {
-                  index=1;
-                });},
-                child:  Container(
-                 child: Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                   index==1?Icon(Icons.shopping_basket_sharp,color: Colors.orange,size: MediaQuery.of(context).size.width *0.06):Icon(Icons.shopping_basket_outlined,color: Colors.orange,size: MediaQuery.of(context).size.width *0.06),
-                   index==1?Text("PANIER",style: TextStyle(fontFamily: "Poppins",color: Colors.orange),):Container()
-                 ],),),)
+
               ,GestureDetector(
                 onTap: (){setState(() {
                   index=2;

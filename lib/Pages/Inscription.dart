@@ -7,9 +7,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/Connexion.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
+import 'package:kiyotaka_s_food/main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 
 class InscriptionPage extends StatefulWidget {
@@ -160,41 +163,34 @@ void affichermotdepasse(){
       child: ListTile(title: Text("COMPTE EXISTANT",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIEZ LE NUMERO",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.dangerous_outlined,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
     )));
   }
-Future <void> enregistrer_utilisateur()async {
-  final url = Uri.parse("http://10.0.2.2:8000/ajouter_utilisateur");
-  var message = await http.post(url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "nom": nom_complet.text,
-        "numero": numero.text,
-        "mot_de_passe": mot_de_passe.text
-      })
-  );
-  var data=jsonDecode(message.body);
-if(data["statut"]=="ajouter"){
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
-}
-
+Future <void> enregistrer_utilisateur() async {
+    try {
+      await supabase
+          .from('utilisateurs')
+          .insert(
+          {
+            "nom": nom_complet.text,
+            "numero": numero.text,
+            "mot_de_passe": mot_de_passe.text
+          }
+      );
+    }catch(e){
+      print("erreur : ${e}");
+    }
 }
     Future <void> verifier_utilisateur()async{
-      final url=Uri.parse("http://10.0.2.2:8000/verifier_utilisateur");
-      var message=await http.post(url,
-          headers: {"Content-Type":"application/json"},
-          body: jsonEncode({
-            "numero":numero.text
-          })
-      );
-    var data=jsonDecode(message.body);
-      if(data["resultat"]!="existe pas"){
+      var reponse=await supabase
+          .from('utilisateurs')
+          .select("*")
+          .eq("numero",numero.text);
+      print(reponse);
+      if(reponse.isNotEmpty){
         message_sur_utilisateur();
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>ConnexionPage()));
-        print("numero existe deja");
-      }else if(data["resultat"]=="existe pas"){
-        await enregistrer_utilisateur();
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>ConnexionPage()), (route)=>false);
+      }else{
+        enregistrer_utilisateur();
         sauvegarder_information_utilisateur();
-      }
-    print(data.toString());
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);}
 }
   Future<void> sauvegarder_information_utilisateur() async{
     final prefs=await SharedPreferences.getInstance();

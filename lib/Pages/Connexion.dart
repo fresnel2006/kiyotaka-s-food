@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
 import 'package:kiyotaka_s_food/Pages/Inscription.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
+import 'package:kiyotaka_s_food/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +22,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
   //variable permettant de stocker des valeurs des saisies
   final numero=TextEditingController();
   final mot_de_passe=TextEditingController();
-
+  var reponse;
   //booleen permettant de donner des couleurs au bordure des champs de saisie
   bool couleur_bordure_numero=true;
   bool couleur_bordure_mot_de_passe=true;
@@ -35,6 +36,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
       print("Erreur sur le lien vers le compte whatsapp dans la page de connexion");
     }
   }
+  
   //fonctions permettant de faire afficher un message d'erreur
   void message_champs_vide(){
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1),backgroundColor:Colors.transparent,content: Container(
@@ -118,23 +120,23 @@ setState(() {
   }
 Future<void> reconnecter_utilisateur()async{
     try{
-      final url=Uri.parse("http://10.0.2.2:8000/reconnecter_utilisateur");
-      final message=await http.post(url,headers: {"Content-Type":"application/json"}
-      ,body: jsonEncode({
-            "numero":numero.text,
-            "mot_de_passe":mot_de_passe.text
-          })
-      );
-      var data=jsonDecode(message.body);
-      if(data["resultat"]=="existe pas"){
-message_sur_utilisateur();
-      }else{
-      await sauvegarder_information_utilisateur(data["resultat"][0][0],data["resultat"][0][1]);
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
-      }
+      reponse=await supabase
+          .from('utilisateurs')
+          .select("*")
+          .eq("numero",numero.text)
+          .eq("mot_de_passe", mot_de_passe.text);
+          print(reponse);
+          if(reponse.isEmpty){
+            message_sur_utilisateur();
+          }else{
+            sauvegarder_information_utilisateur(reponse[0]["nom"],reponse[0]["numero"]);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
+          }
     }catch(e){
-print("erreur niveau reconnexion de l'utilisateur");
+      print("erreur niveau reconnexion de l'utilisateur");
     }
+
+
 }
   @override
   Widget build(BuildContext context) {

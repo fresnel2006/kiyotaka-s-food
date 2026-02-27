@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
+import 'package:kiyotaka_s_food/main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/animation.dart';
@@ -35,7 +36,7 @@ class _ProduitPageState extends State<ProduitPage> {
   int quantite=1;
 
   bool coeur=false;
-  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg",""];
+  var images=["assets/images/Thiéboudiène sénégalais _ la recette de Marc Dufumier.jpg","assets/images/Splash photography on Behance.jpg","assets/images/Attieke à la dorade royale (Côte d'Ivoire) - La tendresse en cuisine.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/eau.jpg","assets/images/crepes ceralac.jpg","assets/images/empiler de crêpe avec Chocolat bruine.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/tchepe poulet.jpg","assets/images/gari.jpeg"];
   var titre=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOCOLAT","EAU","CRÊPES AU CERELAC","CRÊPES AU CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","TCHÊPE POULET","BOUTEILLE DE GARI"];
   var prix=[1000,500,1000,2000,200,2000-1000,2000-1000,3500,1000,4000,500,500,500,1000,500,500];
 
@@ -74,7 +75,7 @@ class _ProduitPageState extends State<ProduitPage> {
     }
     else if (widget.index==14){
       setState(() {
-        prix_produit=500;
+        prix_produit=300;
       });
     }
     else{
@@ -155,8 +156,8 @@ class _ProduitPageState extends State<ProduitPage> {
               Container(
                 width: MediaQuery.of(context).size.width *0.55,
                 height: MediaQuery.of(context).size.height *0.06,
-                child: ElevatedButton(onPressed: (){
-              commander_nourriture();
+                child: ElevatedButton(onPressed: () async{
+              await commander_nourriture();
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
 
 }, child: Text("VALIDER",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),),)
@@ -172,44 +173,31 @@ class _ProduitPageState extends State<ProduitPage> {
       ],)
     ],)));
   }
-  Future<void> commander_nourriture()async{
-    final url=Uri.parse("http://10.0.2.2:8000/enregistrer_commande");
-    var message=await http.post(url,headers: {"Content-Type":"application/json"},
-    body: jsonEncode({
-      "numero":numero,
-      "quantite":quantite.toString(),
-      "produit":titre[widget.index],
-      "nom":nom,
-      "prix_produit":prix_produit.toString(),
-    }));
-
-    var data=jsonDecode(message.body);
-    print(data);
-    if(data["resultat"]=="trop de requette petit hacker"){
-      message_sur_trop_de_commande();
-      return;
-    }else{
-    setState(() {
-      image_panier.add(images[widget.index]);
-      titre_panier.add(titre[widget.index]);
-      prix_panier.add(prix_produit.toString());
-      date_panier.add(DateTime.now().toString());
-      quantite_panier.add(quantite.toString());
-    });
+  Future <void> commander_nourriture() async{
+    try{
+    await supabase
+        .from('commandes')
+        .insert(
+        {
+          "numero": numero,
+          "quantite":quantite.toString(),
+          "produit":titre[widget.index],
+          "nom": nom,
+          "prix_produit":prix_produit.toString()
+        }
+    );
     message_commande_valide();
-    sauvegarder_commande();
 
-  }}
-  Future<void> sauvegarder_commande() async{
-    final prefs=await SharedPreferences.getInstance();
-    prefs.setStringList("image_panier", image_panier);
-    prefs.setStringList("titre_panier", titre_panier);
-    prefs.setStringList("prix_panier", prix_panier);
-    prefs.setStringList("date_panier", date_panier);
-    prefs.setStringList("quantite_panier", quantite_panier);
+  }catch(e){
+      message_commande_non_valide();
+      print("erreur d'enregistrement de la commande");
+    }
+}
 
 
-  }
+
+
+
   Future <void> charger_donnee_utilisateur() async{
     final prefs=await SharedPreferences.getInstance();
     setState(() {
@@ -242,6 +230,17 @@ class _ProduitPageState extends State<ProduitPage> {
           borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
           color: Colors.orange),
       child: ListTile(title: Text("COMMANDE VALIDEE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VOUS SEREZ BIENTOT CONTACTEZ",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.check_circle,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+    )));
+  }
+  void message_commande_non_valide(){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 3),backgroundColor:Colors.transparent,content: Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height *0.1,
+      width: MediaQuery.of(context).size.width *1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
+          color: Colors.red),
+      child: ListTile(title: Text("COMMANDE NON VALIDEE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VOUS SEREZ BIENTOT CONTACTEZ",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.check_circle,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
     )));
   }
   @override
@@ -439,12 +438,13 @@ alignment: AlignmentGeometry.center,
                 width: MediaQuery.of(context).size.width *1,
                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width *0.03,right: MediaQuery.of(context).size.width *0.03),
                 child:
-                widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
+                widget.index==2?Text("Découvrez notre plat composé d’un attiéké fin et bien émietté, accompagné d’un délicieux Tchpê préparé avec soin. Un mélange savoureux, équilibré et généreux, parfait pour un repas complet.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.038)):
                 widget.index==3||widget.index==5||widget.index==6||widget.index==7||widget.index==8||widget.index==9?Text("Crêpe Gourmande ESATIC Découvrez notre délicieuse crêpe préparée avec une pâte légère et moelleuse, cuite à la perfection. Garnie selon votre choix.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035),):
-                widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
-                widget.index==4?Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.03)):
-                widget.index==11?Text("Gari de très bonne qualité, bien sec, propre et naturellement savoureux. Préparé avec soin à partir de manioc sélectionné, il est croquant et agréable à consommer tel quel ou pour accompagner vos plats. Idéal pour une consommation quotidienne.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035)):
-                Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.035))
+                widget.index==0?Text("Savourez notre Tchpê préparé avec une cuisson maîtrisée pour offrir un goût riche et authentique. Parfait pour un repas rapide, consistant et plein de saveurs.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.038)):
+                widget.index==4?Text("Profitez d’une eau fraîche et légère, parfaite pour vous hydrater à tout moment de la journée. Idéale pour accompagner vos repas ou simplement vous rafraîchir.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.038)):
+                widget.index==14?Text("Gari de très bonne qualité, bien sec, propre et naturellement savoureux. Préparé avec soin à partir de manioc sélectionné, il est croquant et agréable à consommer tel quel ou pour accompagner vos plats. Idéal pour une consommation quotidienne.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.038)):
+
+                Text("Savourez un soda pétillant et rafraîchissant, disponible en plusieurs parfums selon votre préférence. Une boisson idéale pour apporter une touche sucrée et agréable à votre commande.",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black87,fontSize: MediaQuery.of(context).size.width *0.038))
 
 
 

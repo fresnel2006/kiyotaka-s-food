@@ -40,13 +40,13 @@ var titre_liste_horizontale=["TCHÊPE POISSON","COCA-COLA","GARBA","CRÊPES CHOC
 var prix_liste_horizontale=["1000 FCFA","500 FCFA","1000 FCFA","1000-2000 fCFA","200 FCFA"];
 
 //images de la liste verticale
-var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/autreboissons.jpg","assets/images/tchepe poulet.jpg","","assets/images/gateau.jpg","assets/images/attieke.jpg"];
+var images_liste_verticale=["assets/images/crepes ceralac.jpg","assets/images/crepes chocolat.jpg","assets/images/crepes fromage.jpg","assets/images/Crêpes au yaourt.jpg","assets/images/Gözleme - Crêpes turques fourrées à la viande hachée.jpg","assets/images/Crystal-Cool Sprite – Refreshment Captured in every sip.jpg","assets/images/Picture of MOSCOW, RUSSIA-APRIL 4, 2014_ Can of….jpg","assets/images/Orangina reviews ratings & information - Bev Rank.jpg","assets/images/autreboissons.jpg","assets/images/tchepe poulet.jpg","assets/images/gari.jpeg","assets/images/gateau.jpg","assets/images/attieke.jpg"];
 
 //titres de la liste horizontale
 var titre_liste_verticale=["CRÊPES CERELAC","CRÊPES  CHOCOLAT","CRÊPES JAMBON","CRÊPES NATURE","CRÊPES BOEUF HACHE","SPRIT","FANTA","ORANGINA","AUTRES BOISSONS","TCHÊPE POULET","BOUTEILLE DE GARI","GATEAU","ATTIEKE"];
 
 //prix de la liste horizontale
-var prix_liste_vertical=["2000 FCFA","2000 FCFA","3500 FCFA","1000-1500 FCFA","4000 FCFA","500 FCFA","500 FCFA","500 FCFA","VARIANT","1000 FCFA","500 FCFA","VARIANT","VARIANT"];
+var prix_liste_vertical=["2000 FCFA","2000 FCFA","3500 FCFA","1000-1500 FCFA","4000 FCFA","500 FCFA","500 FCFA","500 FCFA","VARIANT","1000 FCFA","300 FCFA","VARIANT","VARIANT"];
 
 //fonction pour ramener vers le lien whatsapp de dogbe
 

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
 import 'package:kiyotaka_s_food/Pages/Screen.dart';
+import 'package:kiyotaka_s_food/main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,12 +19,13 @@ class ModificationPage extends StatefulWidget {
 }
 
 class _ModificationPageState extends State<ModificationPage> {
+
   //varible permettant de stocker des valeurs des saisies
   final nom_complet=TextEditingController();
   final numero=TextEditingController();
   final mot_de_passe=TextEditingController();
   final confirmation_mot_de_passe=TextEditingController();
-
+  var mot_de_passe_ancien;
   //booleen permettant de donner des couleurs au bordure des champs de saisie
   bool couleur_bordure_nom=true;
   bool couleur_bordure_numero=true;
@@ -183,22 +185,26 @@ class _ModificationPageState extends State<ModificationPage> {
   }
 
   Future<void>modifier_compte() async{
-    final url = Uri.parse("http://10.0.2.2:8000/modifier_utilisateur");
-    var message = await http.post(url,
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "nom": nom_complet.text,
-          "mot_de_passe": mot_de_passe.text,
-          "numero_utilisation":numero_utilisation
-        })
-    );
+    try {
+      await supabase
+          .from('utilisateurs')
+          .update(
+          {
+            'nom': nom_complet.text,
+            'mot_de_passe': mot_de_passe.text
+          }
+      )
+          .eq('numero', numero_utilisation);
 
-    var data=jsonDecode(message.body);
-    if(data["resultat"]=="modifications ajoutées"){
       sauvegarder_information_utilisateur();
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ScreenPage()), (route)=>false);
       message_sur_modification();
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context) => ScreenPage()), (
+          route) => false);
+    }catch(e){
+      print("echec au niveau de la modification du compte");
     }
+
   }
 
 
@@ -206,12 +212,14 @@ class _ModificationPageState extends State<ModificationPage> {
   Future<void> sauvegarder_information_utilisateur() async{
     final prefs=await SharedPreferences.getInstance();
     prefs.setString("nom_utilisateur", nom_complet.text);
+
   }
   var numero_utilisation;
   void charger_donnee() async{
     final prefs=await SharedPreferences.getInstance();
     setState(() {
       numero_utilisation=prefs.getString("numero_utilisateur");
+
     });
 
   }
@@ -307,14 +315,14 @@ body: SingleChildScrollView(
       ),
 
     ),
-    SizedBox(height: MediaQuery.of(context).size.height *0.04,),
+    SizedBox(height: MediaQuery.of(context).size.height *0.05,),
     //espace
     // les deux traits et le mot "assistance"
     Container(child: ElevatedButton(onPressed: (){
       verification();
 
     }, child: Text("SOUMETTRE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.04),),style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF8B3E3B)),),),
-    SizedBox(height: MediaQuery.of(context).size.height *0.02,),
+    SizedBox(height: MediaQuery.of(context).size.height *0.07,),
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -327,7 +335,7 @@ body: SingleChildScrollView(
 
           decoration: BoxDecoration(border: Border.all(color:Color(0xFF8B3E3B) )),)
       ],),
-    SizedBox(height: MediaQuery.of(context).size.height *0.04,),
+    SizedBox(height: MediaQuery.of(context).size.height *0.02,),
     GestureDetector(
         onTap: () async{
           Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
