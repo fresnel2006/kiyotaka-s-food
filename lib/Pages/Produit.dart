@@ -148,7 +148,7 @@ class _ProduitPageState extends State<ProduitPage> {
                     ),),
                   SizedBox(width: MediaQuery.of(context).size.width *0.1,),
                   Container(
-                    child:  Text("${prix_produit} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange,fontSize: MediaQuery.of(context).size.width *0.05),)
+                    child:  Text("${prix_produit * quantite} FCFA",style: TextStyle(fontFamily: "Poppins",color: Colors.deepOrange,fontSize: MediaQuery.of(context).size.width *0.05),)
                     ,),
 
                 ],),
@@ -174,7 +174,11 @@ class _ProduitPageState extends State<ProduitPage> {
     ],)));
   }
   Future <void> commander_nourriture() async{
+    setState(() {
+      prix_produit=prix_produit*quantite;
+    });
     try{
+
     await supabase
         .from('commandes')
         .insert(
@@ -193,10 +197,6 @@ class _ProduitPageState extends State<ProduitPage> {
       print("erreur d'enregistrement de la commande");
     }
 }
-
-
-
-
 
   Future <void> charger_donnee_utilisateur() async{
     final prefs=await SharedPreferences.getInstance();
@@ -240,7 +240,7 @@ class _ProduitPageState extends State<ProduitPage> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.04)),
           color: Colors.red),
-      child: ListTile(title: Text("COMMANDE NON VALIDEE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VOUS SEREZ BIENTOT CONTACTEZ",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.check_circle,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
+      child: ListTile(title: Text("COMMANDE NON VALIDEE",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.05),),subtitle: Text("VERIFIER LA CONNEXION",style: TextStyle(color: Colors.white70,fontFamily: "Poppins"),),leading: Icon(Icons.check_circle,color: Colors.white,size: MediaQuery.of(context).size.width *0.1,),),
     )));
   }
   @override

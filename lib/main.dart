@@ -10,7 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
   Future<void> main() async {
     await Supabase.initialize(
       url: 'https://nciavyshfzeeasjjdgck.supabase.co',
-      anonKey: 'sb_publishable_M6zNV1rveNAYU6KPdKH7mQ_wgamdve6',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5jaWF2eXNoZnplZWFzampkZ2NrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNDM0OTgsImV4cCI6MjA4MzcxOTQ5OH0.6EYAnj7czEopspYOo6zo8Q8DjGc1mUyQBNrSasxj3Pg',
     );
     WidgetsFlutterBinding.ensureInitialized();
 

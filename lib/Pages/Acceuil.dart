@@ -462,9 +462,7 @@ valeur_redictrice_widget==1?
 
 
             valeur_redictrice_widget==2? Container(
-
                 height: MediaQuery.of(context).size.height *1,
-
                 child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
                   child: Column(

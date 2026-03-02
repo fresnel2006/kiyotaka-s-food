@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kiyotaka_s_food/Pages/Acceuil.dart';
 import 'package:kiyotaka_s_food/Pages/MainScreen.dart';
+import 'package:kiyotaka_s_food/Pages/Screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -158,7 +159,7 @@ class _FavorisPageState extends State<FavorisPage> {
                   Container(child: Text("VEUILLEZ AJOUTER \nUN PRODUIT EN FAVORIS",textAlign: TextAlign.center,style: TextStyle(fontFamily: "Poppins",color: Colors.black,fontSize: MediaQuery.of(context).size.width *0.035),),),
                   SizedBox(height: MediaQuery.of(context).size.height *0.035),
                   Container(child:ElevatedButton(onPressed: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>MainscreenPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
     }, child: Text("AJOUTER PRODUIT",style: TextStyle(fontFamily: "Poppins",color: Colors.white,fontSize: MediaQuery.of(context).size.width *0.035)),style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrangeAccent),) ,)
                 ],
               )
